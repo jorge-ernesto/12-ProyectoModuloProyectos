@@ -231,6 +231,7 @@ define(['N'],
             let recipients = [];
             let projectManager = getProjectManager(proyectoRecord);
             recipients = recipients.concat(projectManager);
+            recipients = [...new Set(recipients)];
 
             // Enviar email
             email.send({
@@ -255,6 +256,7 @@ define(['N'],
             let recipients = [];
             let solicitadoPor = getSolicitadoPor(proyectoRecord);
             recipients = recipients.concat(solicitadoPor);
+            recipients = [...new Set(recipients)];
 
             // Enviar email
             email.send({
@@ -279,6 +281,7 @@ define(['N'],
             let recipients = [];
             let solicitadoPor = getSolicitadoPor(proyectoRecord);
             recipients = recipients.concat(solicitadoPor);
+            recipients = [...new Set(recipients)];
 
             // Enviar email
             email.send({
@@ -304,6 +307,7 @@ define(['N'],
             let comiteArray = getComite();
             log.debug('data', comiteArray);
             recipients = recipients.concat(comiteArray);
+            recipients = [...new Set(recipients)];
 
             // Enviar email
             email.send({
@@ -370,6 +374,7 @@ define(['N'],
             let projectManager = getProjectManager(proyectoRecord);
             let solicitadoPor = getSolicitadoPor(proyectoRecord);
             recipients = recipients.concat(projectManager).concat(solicitadoPor);
+            recipients = [...new Set(recipients)];
 
             // Enviar email
             email.send({
@@ -448,6 +453,7 @@ define(['N'],
             let recipients = [];
             let projectManager = getProjectManager(proyectoRecord);
             recipients = recipients.concat(projectManager);
+            recipients = [...new Set(recipients)];
 
             // Enviar email
             email.send({
