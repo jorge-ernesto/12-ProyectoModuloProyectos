@@ -182,8 +182,8 @@ define(['./lib/Bio.Library.Helper', 'N'],
                 if (country_subsidiary_id == 'PE') {
 
                     // Obtener datos
-                    let trabajo_calculado = newRecord.getValue('calculatedwork');
-                    let linea_base_trabajo_calculado = newRecord.getValue('calculatedworkbaseline');
+                    let trabajo_calculado = newRecord.getValue('calculatedwork') || 0;
+                    let linea_base_trabajo_calculado = newRecord.getValue('calculatedworkbaseline') || 0;
 
                     // Campo eficiencia usado como ayuda
                     let fieldEficienciaProyecto = form.getField('custentity_bio_eficiencia_proyecto');
@@ -203,7 +203,13 @@ define(['./lib/Bio.Library.Helper', 'N'],
                     });
 
                     // Lo realizamos de este modo, ya que esto permitira ver la eficiencia calculada, en el modo ver y editar
-                    let eficiencia = ((linea_base_trabajo_calculado / trabajo_calculado) * 100).toFixed(1) + '%';
+                    let eficiencia = 0;
+                    if (trabajo_calculado > 0) {
+                        eficiencia = ((linea_base_trabajo_calculado / trabajo_calculado) * 100).toFixed(1) + '%';
+                    } else {
+                        eficiencia = eficiencia.toFixed(1) + '%';
+                    }
+
                     fieldEficiencia.defaultValue = eficiencia;
                 }
             }

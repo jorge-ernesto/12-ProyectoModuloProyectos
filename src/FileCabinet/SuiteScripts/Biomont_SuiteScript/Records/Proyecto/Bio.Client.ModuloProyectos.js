@@ -90,6 +90,14 @@ define(['N'],
                         id: 'custentity_bio_area_proyecto',
                         label: 'Área'
                     },
+                    codigo: {
+                        id: 'custentity_bio_codigo_proyecto',
+                        label: 'Código'
+                    },
+                    nombre: {
+                        id: 'companyname',
+                        label: 'Nombre'
+                    },
                     objeto_cambio: {
                         id: 'custentity_bio_obj_cambio_proyecto',
                         label: 'Objeto de Cambio'
