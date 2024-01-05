@@ -59,10 +59,10 @@ define(['./lib/Bio.Library.Helper', 'N'],
                     let status = scriptContext.request.parameters['_status'];
                     let { user } = objHelper.getUser();
                     let comite_array = objHelper.getComite();
-                    let partes_interesadas_array = objHelper.getPartesInteresadas(project_id);
                     let recursos_array = objHelper.getRecursos(project_id);
+                    let partes_interesadas_array = objHelper.getPartesInteresadas(project_id);
 
-                    // Mensajes
+                    /****************** Mostrar mensajes ******************/
                     if (status?.includes('PROCESS_REQUEST')) {
                         form.addPageInitMessage({
                             type: message.Type.INFORMATION,
@@ -87,6 +87,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         })
                     }
 
+                    /****************** Mostrar botones ******************/
                     // Estado diferente de "Cerrado"
                     if (status_id != 1) {
 
@@ -128,7 +129,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         /******************/
 
                         // BOTON ESTADO EN CURSO - Si son miembros del proyecto y si el estado del proyecto es "Autorizado"
-                        if (user.id == solicitado_por_id || user.id == projectmanager_id || comite_array.includes(user.id) || partes_interesadas_array.includes(user.id) || recursos_array.includes(user.id)) {
+                        if (user.id == solicitado_por_id || user.id == projectmanager_id || comite_array.includes(user.id) || recursos_array.includes(user.id) || partes_interesadas_array.includes(user.id)) {
                             if (status_id == 19) { // Estado "Autorizado"
                                 form.addButton({
                                     id: 'custpage_button_estado_en_curso',
@@ -182,9 +183,28 @@ define(['./lib/Bio.Library.Helper', 'N'],
                 if (country_subsidiary_id == 'PE') {
 
                     // Obtener datos
+                    let solicitado_por_id = newRecord.getValue('custentity_bio_solicitado_por');
+                    let projectmanager_id = newRecord.getValue('projectmanager');
+                    let project_id = newRecord.getValue('id');
+
+                    // Obtener datos
+                    let { user } = objHelper.getUser();
+                    let comite_array = objHelper.getComite();
+                    let recursos_array = objHelper.getRecursos(project_id);
+                    let partes_interesadas_array = objHelper.getPartesInteresadas(project_id);
+
+                    // Obtener datos
                     let trabajo_calculado = newRecord.getValue('calculatedwork') || 0;
                     let linea_base_trabajo_calculado = newRecord.getValue('calculatedworkbaseline') || 0;
 
+                    /****************** Validar permiso ******************/
+                    // Validar usuario que puede ver el proyecto
+                    if (!(user.id == solicitado_por_id || user.id == projectmanager_id || comite_array.includes(user.id) || recursos_array.includes(user.id) || partes_interesadas_array.includes(user.id))) {
+
+                        objHelper.error_log('Mensaje', 'No esta autorizado');
+                    }
+
+                    /****************** Calcular eficiencia ******************/
                     // Campo eficiencia usado como ayuda
                     let fieldEficienciaProyecto = form.getField('custentity_bio_eficiencia_proyecto');
                     fieldEficienciaProyecto.updateDisplayType({ displayType: 'HIDDEN' });

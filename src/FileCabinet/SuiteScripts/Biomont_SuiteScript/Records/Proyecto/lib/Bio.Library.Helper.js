@@ -17,6 +17,10 @@ define(['N'],
             throw `${title} -- ${JSON.stringify(data)}`;
         }
 
+        function error_message(message) {
+            throw new Error(`${message}`);
+        }
+
         /******************/
 
         function getDataUser(projectManagerId) {
@@ -526,6 +530,7 @@ define(['N'],
         return {
             getUser,
             error_log,
+            error_message,
             // Modulo Proyectos
             getDataUser,
             getCountrySubsidiary,
