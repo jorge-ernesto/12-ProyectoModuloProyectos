@@ -236,11 +236,11 @@ define(['N'],
 
             console.log('cargarCampos');
 
-            // Solicitud HTTP
-            let responseData = sendRequest('getData');
-
             // Modo crear
             if (mode == 'create') {
+
+                // Solicitud HTTP
+                let responseData = sendRequest('getData');
 
                 // Cargar campos
                 recordContext.setValue('custentity_bio_area_proyecto', responseData.area); // Area del usuario que creo el proyecto
