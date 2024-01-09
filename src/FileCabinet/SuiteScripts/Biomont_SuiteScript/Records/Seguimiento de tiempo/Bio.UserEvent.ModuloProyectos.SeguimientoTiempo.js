@@ -50,7 +50,7 @@ define(['./../Proyecto/lib/Bio.Library.Helper', 'N'],
             var projectRecord = record.load({
                 type: record.Type.JOB,
                 id: projectId
-            })
+            });
 
             // Obtener el usuario logueado
             let user = runtime.getCurrentUser();

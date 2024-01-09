@@ -23,6 +23,9 @@ define(['N'],
         const scriptId = 'customscript_bio_sl_api_modulo_proyectos';
         const deployId = 'customdeploy_bio_sl_api_modulo_proyectos';
 
+        const scriptDownloadId = 'customscript_bio_sl_mod_proy_des_arc';
+        const deployDownloadId = 'customdeploy_bio_sl_mod_proy_des_arc';
+
         const CONFIG_RECORD = {
             default: {
                 fields_mandatory: {
@@ -587,6 +590,29 @@ define(['N'],
             sendRequestWrapper('notificarCierre');
         }
 
+        function descargarPDF() {
+
+            // Obtener el id interno del record proyecto
+            let recordContext = currentRecord.get();
+            let project_id = recordContext.getValue('id');
+
+            // Obtener url del Suitelet mediante ID del Script y ID del Despliegue
+            let suitelet = url.resolveScript({
+                deploymentId: deployDownloadId,
+                scriptId: scriptDownloadId,
+                params: {
+                    _button: 'pdf',
+                    _project_id: project_id
+                }
+            });
+
+            // Evitar que aparezca el mensaje 'Estas seguro que deseas salir de la pantalla'
+            setWindowChanged(window, false);
+
+            // Abrir url
+            window.open(suitelet);
+        }
+
         return {
             pageInit: pageInit,
             fieldChanged: fieldChanged,
@@ -597,7 +623,8 @@ define(['N'],
             actualizarEnCurso: actualizarEnCurso,
             solicitarCierre: solicitarCierre,
             cerrarProyecto: cerrarProyecto,
-            notificarCierre: notificarCierre
+            notificarCierre: notificarCierre,
+            descargarPDF: descargarPDF
         };
 
     });

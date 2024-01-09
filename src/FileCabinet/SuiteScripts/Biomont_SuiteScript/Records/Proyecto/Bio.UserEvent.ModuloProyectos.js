@@ -169,6 +169,12 @@ define(['./lib/Bio.Library.Helper', 'N'],
                             });
                         }
                     }
+
+                    form.addButton({
+                        id: 'custpage_button_descargar_pdf',
+                        label: 'PDF',
+                        functionName: 'descargarPDF()'
+                    });
                 }
             }
 
