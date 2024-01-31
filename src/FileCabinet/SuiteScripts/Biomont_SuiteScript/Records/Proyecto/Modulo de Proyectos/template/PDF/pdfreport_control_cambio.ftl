@@ -56,7 +56,7 @@
             /****************** Head ******************/
 
             .cabecera-head {
-                font-weight: normal;
+                font-weight: bold;
                 border-bottom: 0.1mm solid #000000;
             }
 
@@ -119,21 +119,17 @@
             <tbody>
                 <!-- CUADRO N. 1 -->
                 <tr>
-                    <td class="celda-body" width="140"><b>Solicitado por:</b></td>
-                    <td class="celda-body"><b>Area:</b></td>
-                    <td class="celda-body"><b>Fecha de solicitud:</b></td>
-                    <td class="celda-body" colspan="2"></td>
+                    <td class="celda-body" colspan="1"><b>Solicitado por:</b></td>
+                    <td class="celda-body" colspan="4"><b>Area:</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body">${params.project_data.usuario_firma_solicitado_por}</td>
-                    <td class="celda-body">${params.project_data.area}</td>
-                    <td class="celda-body">${params.project_data.fecha_firma_solicitado_por}</td>
-                    <td class="celda-body" colspan="2"></td>
+                    <td class="celda-body" colspan="1">${params.project_data.usuario_firma_solicitado_por}<br />&nbsp;${params.project_data.fecha_firma_solicitado_por}</td>
+                    <td class="celda-body" colspan="4">${params.project_data.area}</td>
                 </tr>
 
                 <!-- Objeto del cambio -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Objeto del cambio</td>
+                    <td class="cabecera-body" colspan="5"><b>Objeto del cambio</b></td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="5">&nbsp;${params.project_data.obj_cambio}</td>
@@ -141,7 +137,7 @@
 
                 <!-- Producto/proceso relacionado al cambio -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Producto/proceso relacionado al cambio</td>
+                    <td class="cabecera-body" colspan="5"><b>Producto/proceso relacionado al cambio</b></td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="5">&nbsp;${params.project_data.prod_proc_rela}</td>
@@ -149,7 +145,7 @@
 
                 <!-- Justificación -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Justificación</td>
+                    <td class="cabecera-body" colspan="5"><b>Justificación</b></td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="5">&nbsp;${params.project_data.justificacion}</td>
@@ -157,7 +153,7 @@
 
                 <!-- Propuesta de cambio (descripción) -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Propuesta de cambio (descripción)</td>
+                    <td class="cabecera-body" colspan="5"><b>Propuesta de cambio (descripción)</b></td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="5">&nbsp;${params.project_data.descripcion}</td>
@@ -165,7 +161,7 @@
 
                 <!-- Aprobado por: -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Aprobado por:</td>
+                    <td class="cabecera-body" colspan="5"><b>Aprobado por (Jefe Inmediato):</b></td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="5">&nbsp;${params.project_data.usuario_firma_aprobado_por}<br />&nbsp;${params.project_data.fecha_firma_aprobado_por}</td>
@@ -178,11 +174,11 @@
 
                 <!-- CUADRO N. 2 -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Factibilidad del cambio</td>
+                    <td class="cabecera-body" colspan="5"><b>Factibilidad del cambio</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="1"><b>Autorizado por:</b></td>
-                    <td class="celda-body" colspan="4"><b>Comentarios:</b></td>
+                    <td class="celda-body" colspan="1">Autorizado por (Comite de Factibilidad):</td>
+                    <td class="celda-body" colspan="4">Comentarios:</td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="1">${params.project_data.usuario_firma_autorizado_por}<br />${params.project_data.fecha_firma_autorizado_por}</td>
@@ -196,7 +192,7 @@
 
                 <!-- CUADRO N. 3 -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Acciones por ejecutar</td>
+                    <td class="cabecera-body" colspan="5"><b>Acciones por ejecutar</b></td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="2"><b>ACTIVIDAD</b></td>
@@ -220,11 +216,11 @@
 
                 <!-- CUADRO N. 4 -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Cierre del cambio</td>
+                    <td class="cabecera-body" colspan="5"><b>Cierre del cambio</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="1"><b>Aprobado por:</b></td>
-                    <td class="celda-body" colspan="4"><b>Comentarios:</b></td>
+                    <td class="celda-body" colspan="1">Aprobado por:</td>
+                    <td class="celda-body" colspan="4">Comentarios:</td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="1">${params.project_data.usu_firma_cierre_aprobado_por}<br />${params.project_data.fec_firma_cierre_aprobado_por}</td>
@@ -238,22 +234,18 @@
 
                 <!-- CUADRO N. 5 -->
                 <tr>
-                    <td class="cabecera-body" colspan="5">Divulgación del cambio</td>
+                    <td class="cabecera-body" colspan="5"><b>Divulgación del cambio</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body"><b>Notificado a</b></td>
-                    <td class="celda-body"><b>E-mail</b></td>
-                    <td class="celda-body"><b>Área</b></td>
-                    <td class="celda-body">&nbsp;</td>
-                    <td class="celda-body">&nbsp;</td>
+                    <td class="celda-body" colspan="1">Notificado a</td>
+                    <td class="celda-body" colspan="2">E-mail</td>
+                    <td class="celda-body" colspan="2">Área</td>
                 </tr>
                 <#list params.project_data.dataDivulgacionDeCambio as divulgacion>
                 <tr>
-                    <td class="celda-body">${divulgacion.entityid}</td>
-                    <td class="celda-body">${divulgacion.email}</td>
-                    <td class="celda-body">${divulgacion.department}</td>
-                    <td class="celda-body">&nbsp;</td>
-                    <td class="celda-body">&nbsp;</td>
+                    <td class="celda-body" colspan="1">${divulgacion.entityid}</td>
+                    <td class="celda-body" colspan="2">${divulgacion.email}</td>
+                    <td class="celda-body" colspan="2">${divulgacion.department}</td>
                 </tr>
                 </#list>
             </tbody>

@@ -664,7 +664,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para aprobar ${descTipoMayus}`,
+                    subject: `[${descTipoMayus}] Notificación para aprobar`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha creado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de ${descTipoMinus}.<br /><br />
@@ -697,7 +697,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de aprobación del ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación de aprobación`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de ${descTipoMinus}.<br /><br />
@@ -730,7 +730,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de no aprobación del ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación de no aprobación`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de ${descTipoMinus}.<br /><br />
@@ -764,7 +764,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para autorizar ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación para autorizar`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Revisar la autorización.<br /><br />
@@ -815,7 +815,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de autorización del ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación de autorización`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha autorizado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Autorización de ${descTipoMinus}.<br /><br />
@@ -849,7 +849,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de no autorizacion del ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación de no autorizacion`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Autorizacion de ${descTipoMinus}.<br /><br />
@@ -886,7 +886,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de inicio de ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación de inicio`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha iniciado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
@@ -921,7 +921,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para continuar el ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación para continuar`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha culminado con la actividad predecesora, revise y continue el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
@@ -952,7 +952,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para cerrar el ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación para cerrar`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de cierre.<br /><br />
@@ -989,7 +989,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de culminación del ${descTipoMinus}`,
+                    subject: `[${descTipoMinus}] Notificación de culminación`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
@@ -1024,7 +1024,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de culminación del ${descTipoMinus} (Partes interesadas)`,
+                    subject: `[${descTipoMinus}] Notificación de culminación (Partes interesadas)`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
