@@ -644,6 +644,11 @@ define(['N'],
 
         function sendEmail_SolicitarAprobacion(proyectoRecord, user) {
 
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
@@ -659,11 +664,11 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para aprobar Proyecto/Control de Cambio`,
+                    subject: `Notificación para aprobar ${descTipoMayus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha creado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Aprobación de proyecto.<br /><br />
-                        Nombre Proyecto: ${proyectoRecord.getValue('companyname')}<br /><br />
+                        El usuario <b>"${user.name}"</b> ha creado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                        Concepto: Aprobación de ${descTipoMinus}.<br /><br />
+                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -672,6 +677,11 @@ define(['N'],
 
         function sendEmail_AprobarProyecto(proyectoRecord, user) {
 
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
@@ -687,11 +697,11 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de aprobación del proyecto`,
+                    subject: `Notificación de aprobación del ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha aprobado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Aprobación de proyecto.<br /><br />
-                        Nombre Proyecto: ${proyectoRecord.getValue('companyname')}<br /><br />
+                        El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                        Concepto: Aprobación de ${descTipoMinus}.<br /><br />
+                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -700,6 +710,11 @@ define(['N'],
 
         function sendEmail_NoAprobarProyecto(proyectoRecord, user) {
 
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
@@ -715,11 +730,11 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de no aprobación del proyecto`,
+                    subject: `Notificación de no aprobación del ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha rechazado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Aprobación de proyecto.<br /><br />
-                        Nombre Proyecto: ${proyectoRecord.getValue('companyname')}<br /><br />
+                        El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                        Concepto: Aprobación de ${descTipoMinus}.<br /><br />
+                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -727,6 +742,11 @@ define(['N'],
         }
 
         function sendEmail_SolicitarAutorizacion(proyectoRecord, user) {
+
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
 
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
@@ -744,12 +764,12 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para autorizar proyecto`,
+                    subject: `Notificación para autorizar ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha aprobado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                        El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Revisar la autorización.<br /><br />
-                        Concepto: Autorización de proyecto.<br /><br />
-                        Nombre Proyecto: ${proyectoRecord.getValue('companyname')}<br /><br />
+                        Concepto: Autorización de ${descTipoMinus}.<br /><br />
+                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -757,6 +777,11 @@ define(['N'],
         }
 
         function sendEmail_AutorizarProyecto(proyectoRecord, user) {
+
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
 
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
@@ -790,11 +815,11 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de autorización del proyecto`,
+                    subject: `Notificación de autorización del ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha autorizado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Autorización de proyecto.<br /><br />
-                        Nombre Proyecto: ${proyectoRecord.getValue('companyname')}<br /><br />
+                        El usuario <b>"${user.name}"</b> ha autorizado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                        Concepto: Autorización de ${descTipoMinus}.<br /><br />
+                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -802,6 +827,11 @@ define(['N'],
         }
 
         function sendEmail_NoAutorizarProyecto(proyectoRecord, user) {
+
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
 
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
@@ -819,11 +849,11 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de no autorizacion del proyecto`,
+                    subject: `Notificación de no autorizacion del ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha rechazado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Autorizacion de proyecto.<br /><br />
-                        Nombre Proyecto: ${proyectoRecord.getValue('companyname')}<br /><br />
+                        El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                        Concepto: Autorizacion de ${descTipoMinus}.<br /><br />
+                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -832,6 +862,11 @@ define(['N'],
 
         function sendEmail_ActualizarEnCurso(proyectoRecord, user) {
 
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
@@ -851,9 +886,9 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de inicio de proyecto`,
+                    subject: `Notificación de inicio de ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha iniciado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}".<br /><br />
+                        El usuario <b>"${user.name}"</b> ha iniciado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -862,6 +897,11 @@ define(['N'],
 
         function sendEmail_NotificarCulminacionTarea(proyectoRecord, user) {
 
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
@@ -881,9 +921,9 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para continuar el proyecto`,
+                    subject: `Notificación para continuar el ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha culminado con la actividad predecesora, revise y continue el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}".<br /><br />
+                        El usuario <b>"${user.name}"</b> ha culminado con la actividad predecesora, revise y continue el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -891,6 +931,11 @@ define(['N'],
         }
 
         function sendEmail_SolicitarCierre(proyectoRecord, user) {
+
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
 
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
@@ -907,11 +952,11 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación para cerrar el proyecto`,
+                    subject: `Notificación para cerrar el ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha cerrado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                        El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de cierre.<br /><br />
-                        Nombre Proyecto: ${proyectoRecord.getValue('companyname')}<br /><br />
+                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -920,6 +965,11 @@ define(['N'],
 
         function sendEmail_AprobarCierre(proyectoRecord, user) {
 
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
@@ -939,9 +989,9 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de culminación del proyecto`,
+                    subject: `Notificación de culminación del ${descTipoMinus}`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha cerrado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}".<br /><br />
+                        El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -950,6 +1000,11 @@ define(['N'],
 
         function sendEmail_NotificarCierre(proyectoRecord, user) {
 
+            // Obtener datos
+            let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
+            let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
+            let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
@@ -969,9 +1024,9 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `Notificación de culminación del proyecto (Partes interesadas)`,
+                    subject: `Notificación de culminación del ${descTipoMinus} (Partes interesadas)`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha cerrado el proyecto/control de cambio "${proyectoRecord.getValue('companyname')}".<br /><br />
+                        El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });

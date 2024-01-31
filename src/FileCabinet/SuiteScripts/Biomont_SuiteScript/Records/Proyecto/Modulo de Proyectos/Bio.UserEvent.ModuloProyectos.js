@@ -205,7 +205,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
 
                     /****************** Validar permiso ******************/
                     // Validar usuario que puede ver el proyecto
-                    if (!(user.id == solicitado_por_id || user.id == projectmanager_id || comite_array.includes(user.id) || recursos_array.includes(user.id) || partes_interesadas_array.includes(user.id))) {
+                    if (!(user.id == solicitado_por_id || user.id == projectmanager_id || comite_array.includes(user.id) || recursos_array.includes(user.id) || partes_interesadas_array.includes(user.id) || user.role == '3')) {
 
                         objHelper.error_log('Mensaje', 'No esta autorizado');
                     }
@@ -248,13 +248,13 @@ define(['./lib/Bio.Library.Helper', 'N'],
 
                 // Obtener datos
                 let formulario = newRecord.getValue('customform');
-                let tipo_proyecto = newRecord.getValue('custentity_bio_tipo_proyecto');
+                let tipo = newRecord.getValue('custentity_bio_tipo_proyecto');
 
                 // Si es formulario "BIO_FRM_PROYECTO"
                 if (formulario == 384) {
 
                     // Si es tipo "Proyecto"
-                    if (tipo_proyecto == 1) {
+                    if (tipo == 1) {
 
                         // Obtener correlativo cpn formato "OP0001"
                         newRecord.setValue('custentity_bio_codigo_proyecto', objHelper.getCorrelativoFormato());
@@ -281,13 +281,13 @@ define(['./lib/Bio.Library.Helper', 'N'],
 
                 // Obtener datos
                 let formulario = newRecord.getValue('customform');
-                let tipo_proyecto = newRecord.getValue('custentity_bio_tipo_proyecto');
+                let tipo = newRecord.getValue('custentity_bio_tipo_proyecto');
 
                 // Si es formulario "BIO_FRM_PROYECTO"
                 if (formulario == 384) {
 
                     // Si es tipo "Proyecto"
-                    if (tipo_proyecto == 1) {
+                    if (tipo == 1) {
 
                         // Actualizar correlativo
                         objHelper.actualizarCorrelativo();
