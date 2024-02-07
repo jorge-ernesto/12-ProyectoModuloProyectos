@@ -224,6 +224,36 @@ define(['N'],
             return empleadosArray;
         }
 
+        function getRecursosProximaTarea(projectId, projectTaskId) {
+
+            // Obtener tareas
+            let dataTareas = getTareas(projectId);
+            let filterDataTareas = dataTareas.filter(item => item.es_tarea_resumen == false);
+
+            // Debug
+            // error_log('dataTareas', dataTareas);
+            // error_log('filterDataTareas', filterDataTareas);
+
+            // Obtener recursos de la proxima tarea
+            let recursos = [];
+            let recursosId = [];
+            let nextIndex = filterDataTareas.findIndex(item => item.tarea.id_interno == projectTaskId); // Encontrar indice de la tarea actual, findIndex, si no encuentra indice retorna -1
+            if (nextIndex >= 0) { // Validar que encontro indice de la tarea actual
+                nextIndex = nextIndex + 1; // Obtener indice de la tarea siguiente
+                if (nextIndex < filterDataTareas.length) { // Validar que exista indice de la tarea siguiente
+                    recursos = filterDataTareas[nextIndex]['recursos'];
+                    recursosId = recursos.map(item => Number(item.recurso.id));
+                }
+            }
+
+            // Debug
+            // error_log('debug', { nextIndex, recursosId });
+
+            return recursosId;
+        }
+
+        /******************/
+
         function getTareas(projectId) {
 
             // Crear un array para almacenar los valores
@@ -239,6 +269,11 @@ define(['N'],
                         label: "ID interno"
                     }),
                     search.createColumn({ name: "companyname", label: "Nombre del trabajo" }),
+                    search.createColumn({
+                        name: "internalid",
+                        join: "projectTask",
+                        label: "ID interno"
+                    }),
                     search.createColumn({
                         name: "id",
                         join: "projectTask",
@@ -296,14 +331,15 @@ define(['N'],
                 let { columns } = result;
                 let proyecto_id_interno = result.getValue(columns[0])
                 let proyecto_nombre = result.getValue(columns[1]);
-                let tarea_id = result.getValue(columns[2]);
-                let tarea_nombre = result.getValue(columns[3]);
-                let fecha_inicio = result.getValue(columns[4]); // Fecha de inicio - planificada
-                let fecha_finalizacion = result.getValue(columns[5]); // Fecha de finalizacion - planificada
-                let trabajo_planificado = result.getValue(columns[6]);
-                let trabajo_calculado = result.getValue(columns[7]);
-                let porcentaje_completado = result.getValue(columns[8]);
-                let es_tarea_resumen = result.getValue(columns[9]);
+                let tarea_id_interno = result.getValue(columns[2]);
+                let tarea_id = result.getValue(columns[3]);
+                let tarea_nombre = result.getValue(columns[4]);
+                let fecha_inicio = result.getValue(columns[5]); // Fecha de inicio - planificada
+                let fecha_finalizacion = result.getValue(columns[6]); // Fecha de finalizacion - planificada
+                let trabajo_planificado = result.getValue(columns[7]);
+                let trabajo_calculado = result.getValue(columns[8]);
+                let porcentaje_completado = result.getValue(columns[9]);
+                let es_tarea_resumen = result.getValue(columns[10]);
 
                 // Procesar informacion
                 // Obtener nombre de las tareas y eliminar texto antes del separador ' : ' para obtener un nombre limpio.
@@ -317,6 +353,7 @@ define(['N'],
                 let tareasPersonasAsignadasArray_ = agruparTareasPersonasAsignadas(tareasPersonasAsignadasArray);
                 // error_log('tareasPersonasAsignadasArray', tareasPersonasAsignadasArray);
                 // error_log('tareasPersonasAsignadasArray_', tareasPersonasAsignadasArray_);
+                let recursos = tareasPersonasAsignadasArray_[proyecto_id_interno]?.[tarea_id];
                 let recursos_nombres = tareasPersonasAsignadasArray_[proyecto_id_interno]?.[tarea_id]?.[0]?.['recursos_nombres'];
                 let recursos_cantidad = tareasPersonasAsignadasArray_[proyecto_id_interno]?.[tarea_id].length;
 
@@ -336,13 +373,14 @@ define(['N'],
                 // Insertar informacion en array
                 tareasArray.push({
                     proyecto: { id_interno: proyecto_id_interno, nombre: proyecto_nombre },
-                    tarea: { id: tarea_id, nombre: tarea_nombre },
+                    tarea: { id_interno: tarea_id_interno, id: tarea_id, nombre: tarea_nombre },
                     fecha_inicio: fecha_inicio,
                     fecha_finalizacion: fecha_finalizacion,
                     trabajo_planificado: trabajo_planificado,
                     trabajo_calculado: trabajo_calculado,
                     porcentaje_completado: porcentaje_completado,
                     es_tarea_resumen: es_tarea_resumen,
+                    recursos: recursos,
                     recursos_nombres: recursos_nombres,
                     recursos_cantidad: recursos_cantidad,
                     horas_calendario_predeterminado: dataCalendarioPredeterminado.horas_calendario_predeterminado,
@@ -375,6 +413,7 @@ define(['N'],
                         join: "job",
                         label: "Nombre del trabajo"
                     }),
+                    search.createColumn({ name: "internalid", label: "ID interno" }),
                     search.createColumn({
                         name: "id",
                         sort: search.Sort.ASC,
@@ -406,18 +445,20 @@ define(['N'],
             searchObj.run().each(function (result) {
                 // Obtener informacion
                 let { columns } = result;
-                let proyecto_id_interno = result.getValue(columns[0])
-                let proyecto_nombre = result.getValue(columns[1])
-                let tarea_id = result.getValue(columns[2]);
-                let tarea_nombre = result.getValue(columns[3]);
-                let recurso_nombre = result.getText(columns[4]);
-                let recursos_nombres = result.getValue(columns[5])
+                let proyecto_id_interno = result.getValue(columns[0]);
+                let proyecto_nombre = result.getValue(columns[1]);
+                let tarea_id_interno = result.getValue(columns[2]);
+                let tarea_id = result.getValue(columns[3]);
+                let tarea_nombre = result.getValue(columns[4]);
+                let recurso_id_interno = result.getValue(columns[5]);
+                let recurso_nombre = result.getText(columns[5]);
+                let recursos_nombres = result.getValue(columns[6])
 
                 // Insertar informacion en array
                 tareasPersonasAsignadasArray.push({
                     proyecto: { id_interno: proyecto_id_interno, nombre: proyecto_nombre },
-                    tarea: { id: tarea_id, nombre: tarea_nombre },
-                    recurso_nombre: recurso_nombre,
+                    tarea: { id_interno: tarea_id_interno, id: tarea_id, nombre: tarea_nombre },
+                    recurso: { id: recurso_id_interno, nombre: recurso_nombre },
                     recursos_nombres: recursos_nombres,
                 });
                 return true;
@@ -542,6 +583,8 @@ define(['N'],
             const diasSemana = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
             return diasSemana[numeroDia];
         }
+
+        /******************/
 
         function getDivulgacionDeCambio(projectId) {
 
@@ -697,7 +740,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación de aprobación`,
+                    subject: `[${descTipoMayus}] Notificación de aprobación`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de ${descTipoMinus}.<br /><br />
@@ -730,7 +773,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación de no aprobación`,
+                    subject: `[${descTipoMayus}] Notificación de no aprobación`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de ${descTipoMinus}.<br /><br />
@@ -764,7 +807,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación para autorizar`,
+                    subject: `[${descTipoMayus}] Notificación para autorizar`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Revisar la autorización.<br /><br />
@@ -815,7 +858,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación de autorización`,
+                    subject: `[${descTipoMayus}] Notificación de autorización`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha autorizado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Autorización de ${descTipoMinus}.<br /><br />
@@ -849,7 +892,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación de no autorizacion`,
+                    subject: `[${descTipoMayus}] Notificación de no autorizacion`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Autorizacion de ${descTipoMinus}.<br /><br />
@@ -875,9 +918,8 @@ define(['N'],
             let recursosArray = getRecursos(proyectoRecord.getValue('id'));
             let projectManager = getProjectManager(proyectoRecord);
             let solicitadoPor = getSolicitadoPor(proyectoRecord);
-            let partesInteresadasArray = getPartesInteresadas(proyectoRecord.getValue('id'));
             let comiteArray = getComite();
-            recipients = recipients.concat(recursosArray).concat(projectManager).concat(solicitadoPor).concat(partesInteresadasArray).concat(comiteArray);
+            recipients = recipients.concat(recursosArray).concat(projectManager).concat(solicitadoPor).concat(comiteArray);
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
@@ -886,7 +928,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación de inicio`,
+                    subject: `[${descTipoMayus}] Notificación de inicio`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha iniciado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
@@ -895,24 +937,37 @@ define(['N'],
             }
         }
 
-        function sendEmail_NotificarCulminacionTarea(proyectoRecord, user) {
+        function sendEmail_NotificarCulminacionTarea(proyectoRecord, user, proyectoTareaRecord) {
 
             // Obtener datos
             let tipo = proyectoRecord.getValue('custentity_bio_tipo_proyecto');
             let descTipoMayus = (tipo == 2) ? 'Control de Cambio' : 'Proyecto';
             let descTipoMinus = (tipo == 2) ? 'control de cambio' : 'proyecto';
 
+            // Obtener datos
+            let tarea_titulo = proyectoTareaRecord.getValue('title');
+
             // Obtener url
             let { urlRecord } = getUrlRecord(proyectoRecord.getValue('id'));
 
             // Obtener empleados
             let recipients = [];
-            let recursosArray = getRecursos(proyectoRecord.getValue('id'));
-            let projectManager = getProjectManager(proyectoRecord);
-            let solicitadoPor = getSolicitadoPor(proyectoRecord);
-            let partesInteresadasArray = getPartesInteresadas(proyectoRecord.getValue('id'));
-            let comiteArray = getComite();
-            recipients = recipients.concat(recursosArray).concat(projectManager).concat(solicitadoPor).concat(partesInteresadasArray).concat(comiteArray);
+            if (tipo == 1) { // Proyecto
+
+                // Obtener empleados
+                let recursosArray = getRecursos(proyectoRecord.getValue('id'));
+                let projectManager = getProjectManager(proyectoRecord);
+                let solicitadoPor = getSolicitadoPor(proyectoRecord);
+                let partesInteresadasArray = getPartesInteresadas(proyectoRecord.getValue('id'));
+                let comiteArray = getComite();
+                recipients = recipients.concat(recursosArray).concat(projectManager).concat(solicitadoPor).concat(partesInteresadasArray).concat(comiteArray);
+            } else if (tipo == 2) { // Control de Cambio
+
+                // Obtener recursos de la proxima tarea
+                let solicitadoPor = getSolicitadoPor(proyectoRecord);
+                let recursosProximaTareaArray = getRecursosProximaTarea(proyectoRecord.getValue('id'), proyectoTareaRecord.getValue('id'));
+                recipients = recipients.concat(solicitadoPor).concat(recursosProximaTareaArray);
+            }
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
@@ -921,9 +976,9 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación para continuar`,
+                    subject: `[${descTipoMayus}] Notificación para continuar`,
                     body: `
-                        El usuario <b>"${user.name}"</b> ha culminado con la actividad predecesora, revise y continue el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
+                        El usuario <b>"${user.name}"</b> ha culminado con la actividad <b>"${tarea_titulo}"</b>, revise y continue el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
                     `
                 });
@@ -952,7 +1007,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación para cerrar`,
+                    subject: `[${descTipoMayus}] Notificación para cerrar`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
                         Concepto: Aprobación de cierre.<br /><br />
@@ -989,7 +1044,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación de culminación`,
+                    subject: `[${descTipoMayus}] Notificación de culminación`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>
@@ -1024,7 +1079,7 @@ define(['N'],
                 email.send({
                     author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
                     recipients: recipients,
-                    subject: `[${descTipoMinus}] Notificación de culminación (Partes interesadas)`,
+                    subject: `[${descTipoMayus}] Notificación de culminación (Partes interesadas)`,
                     body: `
                         El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
                         Link: <a href="${urlRecord}">${urlRecord}</a>

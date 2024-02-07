@@ -62,7 +62,7 @@ define(['./../../Proyecto/Modulo de Proyectos/lib/Bio.Library.Helper', 'N'],
             // Enviar correo si la tarea esta completa al 100%
             if (percenttimecomplete == 100) {
 
-                objHelper.sendEmail_NotificarCulminacionTarea(projectRecord, user)
+                objHelper.sendEmail_NotificarCulminacionTarea(projectRecord, user, projectTaskRecord)
             }
         }
 
