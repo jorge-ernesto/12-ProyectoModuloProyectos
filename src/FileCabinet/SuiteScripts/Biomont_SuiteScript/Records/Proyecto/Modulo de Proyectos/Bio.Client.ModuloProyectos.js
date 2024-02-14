@@ -144,20 +144,23 @@ define(['N'],
 
             // Obtener datos
             let formulario = recordContext.getValue('customform');
-            let id = recordContext.getValue('id');
 
             // Debug
             console.log('pageInit');
-            console.log({ recordContext, mode, id });
+            console.log({ recordContext, mode });
 
-            // Si es formulario "BIO_FRM_PROYECTO"
-            if (formulario == 384) {
+            // Modo crear, editar o copiar
+            if (mode == 'create' || mode == 'edit' || mode == 'copy') {
 
-                // Cargar campos
-                cargarCampos(recordContext, mode);
+                // Si es formulario "BIO_FRM_PROYECTO"
+                if (formulario == 384) {
 
-                // Habilitar campos por tipo
-                habilitarCamposPorTipo(recordContext, id);
+                    // Cargar campos
+                    cargarCampos(recordContext, mode);
+
+                    // Habilitar campos por tipo
+                    habilitarCamposPorTipo(recordContext, mode);
+                }
             }
         }
 
@@ -177,23 +180,26 @@ define(['N'],
 
             // Obtener el currentRecord y mode
             let recordContext = scriptContext.currentRecord;
-            let mode = scriptContext.mode;
+            let mode = recordContext.getValue('id') ? 'edit' : 'create';
 
             // Obtener datos
             let formulario = recordContext.getValue('customform');
-            let id = recordContext.getValue('id');
 
-            // Si es formulario "BIO_FRM_PROYECTO"
-            if (formulario == 384) {
+            // Modo crear, editar o copiar
+            if (mode == 'create' || mode == 'edit' || mode == 'copy') {
 
-                // Esto se ejecuta cuando se hacen cambios en el combo estado accion
-                if (scriptContext.fieldId == 'custentity_bio_tipo_proyecto') {
+                // Si es formulario "BIO_FRM_PROYECTO"
+                if (formulario == 384) {
 
-                    // Debug
-                    console.log('fieldChanged');
-                    console.log({ recordContext, mode, id });
+                    // Esto se ejecuta cuando se hacen cambios en el combo estado accion
+                    if (scriptContext.fieldId == 'custentity_bio_tipo_proyecto') {
 
-                    habilitarCamposPorTipo(recordContext, id);
+                        // Debug
+                        console.log('fieldChanged');
+                        console.log({ recordContext, mode });
+
+                        habilitarCamposPorTipo(recordContext, mode);
+                    }
                 }
             }
         }
@@ -211,22 +217,25 @@ define(['N'],
 
             // Obtener el currentRecord y mode
             let recordContext = scriptContext.currentRecord;
-            let mode = scriptContext.mode;
+            let mode = recordContext.getValue('id') ? 'edit' : 'create';
 
             // Obtener datos
             let formulario = recordContext.getValue('customform');
-            let id = recordContext.getValue('id');
 
             // Debug
             console.log('saveRecord');
-            console.log({ recordContext, mode, id });
+            console.log({ recordContext, mode });
 
-            // Si es formulario "BIO_FRM_PROYECTO"
-            if (formulario == 384) {
+            // Modo crear, editar o copiar
+            if (mode == 'create' || mode == 'edit' || mode == 'copy') {
 
-                // Validar campos obligatorios
-                if (validarCamposObligatorios(recordContext)) {
-                    return false;
+                // Si es formulario "BIO_FRM_PROYECTO"
+                if (formulario == 384) {
+
+                    // Validar campos obligatorios
+                    if (validarCamposObligatorios(recordContext)) {
+                        return false;
+                    }
                 }
             }
 
@@ -251,12 +260,12 @@ define(['N'],
             }
         }
 
-        function habilitarCamposPorTipo(recordContext, id) {
+        function habilitarCamposPorTipo(recordContext, mode) {
 
             console.log('habilitarCamposPorTipo');
 
             // Deshabilitar todos los campos
-            deshabilitarTodosCampos(recordContext, id);
+            deshabilitarTodosCampos(recordContext, mode);
 
             /**
             * Funcionalidad para habilitar y deshabilitar campos
@@ -264,28 +273,24 @@ define(['N'],
                 - Proyecto: 1
                 - Control de Cambio: 2
             */
-
             // Obtener combo "Tipo"
             let comboTipo = recordContext.getValue('custentity_bio_tipo_proyecto');
-            console.log('comboTipo', comboTipo);
 
-            // Deshabilitar combo "Tipo" en modo edicion
-            if (id) {
-                recordContext.getField('custentity_bio_tipo_proyecto').isDisabled = true;
-            }
+            // Debug
+            console.log('comboTipo', comboTipo);
 
             // Habilitar campos "Proyecto"
             if (comboTipo == 1) {
-                habilitarCamposProyecto(recordContext, id);
+                habilitarCamposProyecto(recordContext, mode);
             }
 
             // Habilitar campos "Control de Cambio"
             if (comboTipo == 2) {
-                habilitarCamposControlCambio(recordContext, id);
+                habilitarCamposControlCambio(recordContext, mode);
             }
         }
 
-        function deshabilitarTodosCampos(recordContext, id) {
+        function deshabilitarTodosCampos(recordContext, mode) {
 
             // SuiteScript 2.x Modules
             // N/currentRecord Module
@@ -303,8 +308,13 @@ define(['N'],
             recordContext.getField('custentity_bio_justificacion_proyecto').isDisabled = true; // Se deshabilita
             recordContext.getField('custentity_bio_descripcion_proyecto').isDisabled = true;   // Se deshabilita
 
+            // Deshabilitar combo "Tipo" en modo edicion
+            if (mode == 'edit') {
+                recordContext.getField('custentity_bio_tipo_proyecto').isDisabled = true;
+            }
+
             // No existe id, es decir aun no existe el registro
-            if (!id) {
+            if (mode == 'create') {
                 // Limpiar campos
                 recordContext.setValue('custentity_bio_codigo_proyecto', '');
                 recordContext.setValue('custentity_bio_obj_cambio_proyecto', '');
@@ -312,7 +322,7 @@ define(['N'],
             }
         }
 
-        function habilitarCamposProyecto(recordContext, id) {
+        function habilitarCamposProyecto(recordContext, mode) {
 
             // Deshabilitar campos
             recordContext.getField('custentity_bio_solicitado_por').isDisabled = false;         // Se habilita
@@ -327,13 +337,13 @@ define(['N'],
             recordContext.getField('custentity_bio_descripcion_proyecto').isDisabled = false;   // Se habilita
 
             // No existe id, es decir aun no existe el registro
-            if (!id) {
+            if (mode == 'create') {
                 // Limpiar campos
                 recordContext.setValue('custentity_bio_codigo_proyecto', 'A generar');
             }
         }
 
-        function habilitarCamposControlCambio(recordContext, id) {
+        function habilitarCamposControlCambio(recordContext, mode) {
 
             // Deshabilitar campos
             recordContext.getField('custentity_bio_solicitado_por').isDisabled = false;         // Se habilita

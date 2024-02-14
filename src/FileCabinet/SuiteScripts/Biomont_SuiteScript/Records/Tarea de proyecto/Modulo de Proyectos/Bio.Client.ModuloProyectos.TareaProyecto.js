@@ -36,7 +36,7 @@ define(['N'],
          */
         function fieldChanged(scriptContext) {
 
-            // Siempre se ejecuta, ya sea a nivel de linea (en una sublista) o a nivel de cabecera
+            // Siempre se ejecuta, ya sea a nivel de cabecera o a nivel de linea (sublista)
             // console.log('fieldChanged', scriptContext);
 
             // Esta función setValueSubList se encarga de manejar valores por defecto en la sublista
