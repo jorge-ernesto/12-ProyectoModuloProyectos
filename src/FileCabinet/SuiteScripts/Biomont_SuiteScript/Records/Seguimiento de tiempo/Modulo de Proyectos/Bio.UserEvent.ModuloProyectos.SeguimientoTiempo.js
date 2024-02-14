@@ -5,9 +5,9 @@
 //      - Tiempo (timebill)
 
 // Validación como la usa LatamReady:
-// - ClientScript ----> Se ejecuta en modo crear, copiar o editar. No se ejecuta en modo ver.
-// - En modo crear o editar ----> Validamos por el formulario.
-// - En modo ver ----> Validamos por el pais de la subsidiaria.
+// - ClientScript           : Se ejecuta en modo crear, copiar o editar. No se ejecuta en modo ver.
+// - En modo crear o editar : Validamos por el formulario.
+// - En modo ver            : Validamos por el pais de la subsidiaria.
 
 /**
  * @NApiVersion 2.1
@@ -35,34 +35,41 @@ define(['./../../Proyecto/Modulo de Proyectos/lib/Bio.Library.Helper', 'N'],
             let { newRecord, type } = scriptContext;
 
             // Obtener datos
-            let projectTaskId = newRecord.getValue('casetaskevent');
-            let projectId = newRecord.getValue('customer');
-            log.debug('projectTaskId', projectTaskId);
-            log.debug('projectId', projectId);
+            let formulario = newRecord.getValue('customform') || null;
 
-            // Obtener el record de la Tarea del proyecto
-            var projectTaskRecord = record.load({
-                type: record.Type.PROJECT_TASK,
-                id: projectTaskId
-            });
+            // Modo crear, editar y formulario "FRM_SEGUIMIENTO_TIEMPO"
+            if ((type == 'create' || type == 'edit') && formulario == 398) {
 
-            // Obtener el record del proyecto
-            var projectRecord = record.load({
-                type: record.Type.JOB,
-                id: projectId
-            });
+                // Obtener datos
+                let projectTaskId = newRecord.getValue('casetaskevent');
+                let projectId = newRecord.getValue('customer');
+                log.debug('projectTaskId', projectTaskId);
+                log.debug('projectId', projectId);
 
-            // Obtener el usuario logueado
-            let user = runtime.getCurrentUser();
+                // Obtener el record de la Tarea del proyecto
+                var projectTaskRecord = record.load({
+                    type: record.Type.PROJECT_TASK,
+                    id: projectTaskId
+                });
 
-            // Obtener datos de la tarea del proyecto
-            var percenttimecomplete = projectTaskRecord.getValue('percenttimecomplete');
-            log.debug('percenttimecomplete', percenttimecomplete);
+                // Obtener el record del proyecto
+                var projectRecord = record.load({
+                    type: record.Type.JOB,
+                    id: projectId
+                });
 
-            // Enviar correo si la tarea esta completa al 100%
-            if (percenttimecomplete == 100) {
+                // Obtener el usuario logueado
+                let user = runtime.getCurrentUser();
 
-                objHelper.sendEmail_NotificarCulminacionTarea(projectRecord, user, projectTaskRecord)
+                // Obtener datos de la tarea del proyecto
+                var percenttimecomplete = projectTaskRecord.getValue('percenttimecomplete');
+                log.debug('percenttimecomplete', percenttimecomplete);
+
+                // Enviar correo si la tarea esta completa al 100%
+                if (percenttimecomplete == 100) {
+
+                    objHelper.sendEmail_NotificarCulminacionTarea(projectRecord, user, projectTaskRecord)
+                }
             }
         }
 
