@@ -105,11 +105,7 @@
                     <th colspan="3" class="cabecera-head" align="center" style="vertical-align: middle; font-size: 14px;">
                         ${params.project_data.codigo} ${params.project_data.nombre}
                     </th>
-                    <th colspan="1" width="56" class="cabecera-head" style="vertical-align: middle;">
-                        Código: F-AC.009<br />
-                        Versión: 10<br />
-                        Vigente desde: <br />27/12/2023
-                    </th>
+                    <th colspan="1" width="56" class="cabecera-head" style="vertical-align: middle;"></th>
                 </tr>
             </thead>
             <tbody>

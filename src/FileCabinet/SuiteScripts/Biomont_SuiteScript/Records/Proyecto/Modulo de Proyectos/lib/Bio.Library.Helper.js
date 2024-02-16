@@ -998,7 +998,8 @@ define(['N'],
             // Obtener empleados
             let recipients = [];
             let projectManager = getProjectManager(proyectoRecord);
-            recipients = recipients.concat(projectManager);
+            let comiteArray = getComite();
+            recipients = recipients.concat(projectManager).concat(comiteArray);
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
