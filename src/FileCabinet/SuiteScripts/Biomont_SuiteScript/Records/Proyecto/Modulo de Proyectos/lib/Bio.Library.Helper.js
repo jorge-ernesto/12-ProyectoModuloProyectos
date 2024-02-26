@@ -702,20 +702,29 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación para aprobar`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha creado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Aprobación de ${descTipoMinus}.<br /><br />
-                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación para aprobar`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha creado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                            Concepto: Aprobación de ${descTipoMinus}.<br /><br />
+                            Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_AprobarProyecto(proyectoRecord, user) {
@@ -735,20 +744,29 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación de aprobación`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Aprobación de ${descTipoMinus}.<br /><br />
-                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación de aprobación`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                            Concepto: Aprobación de ${descTipoMinus}.<br /><br />
+                            Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_NoAprobarProyecto(proyectoRecord, user) {
@@ -768,20 +786,29 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación de no aprobación`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Aprobación de ${descTipoMinus}.<br /><br />
-                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación de no aprobación`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                            Concepto: Aprobación de ${descTipoMinus}.<br /><br />
+                            Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_SolicitarAutorizacion(proyectoRecord, user) {
@@ -802,21 +829,30 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación para autorizar`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Revisar la autorización.<br /><br />
-                        Concepto: Autorización de ${descTipoMinus}.<br /><br />
-                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación para autorizar`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha aprobado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                            Revisar la autorización.<br /><br />
+                            Concepto: Autorización de ${descTipoMinus}.<br /><br />
+                            Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_AutorizarProyecto(proyectoRecord, user) {
@@ -847,26 +883,36 @@ define(['N'],
                 let projectManager = getProjectManager(proyectoRecord);
                 let solicitadoPor = getSolicitadoPor(proyectoRecord);
                 let partesInteresadasArray = getPartesInteresadas(proyectoRecord.getValue('id'));
-                log.debug('data', { recursosArray, projectManager, solicitadoPor, partesInteresadasArray });
-                recipients = recipients.concat(recursosArray).concat(projectManager).concat(solicitadoPor).concat(partesInteresadasArray);
+                let comiteArray = getComite();
+                log.debug('data', { recursosArray, projectManager, solicitadoPor, partesInteresadasArray, comiteArray });
+                recipients = recipients.concat(recursosArray).concat(projectManager).concat(solicitadoPor).concat(partesInteresadasArray).concat(comiteArray);
                 recipients = [...new Set(recipients)];
                 recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
             }
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación de autorización`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha autorizado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Autorización de ${descTipoMinus}.<br /><br />
-                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación de autorización`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha autorizado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                            Concepto: Autorización de ${descTipoMinus}.<br /><br />
+                            Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_NoAutorizarProyecto(proyectoRecord, user) {
@@ -887,20 +933,29 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación de no autorizacion`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Autorizacion de ${descTipoMinus}.<br /><br />
-                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación de no autorizacion`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha rechazado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                            Concepto: Autorizacion de ${descTipoMinus}.<br /><br />
+                            Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_ActualizarEnCurso(proyectoRecord, user) {
@@ -923,18 +978,27 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación de inicio`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha iniciado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación de inicio`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha iniciado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_NotificarCulminacionTarea(proyectoRecord, user, proyectoTareaRecord) {
@@ -971,18 +1035,27 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación para continuar`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha culminado con la actividad <b>"${tarea_titulo}"</b>, revise y continue el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación para continuar`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha culminado con la actividad <b>"${tarea_titulo}"</b>, revise y continue el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_SolicitarCierre(proyectoRecord, user) {
@@ -1003,20 +1076,29 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación para cerrar`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
-                        Concepto: Aprobación de cierre.<br /><br />
-                        Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación para cerrar`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}" en el Sistema Oracle.<br /><br />
+                            Concepto: Aprobación de cierre.<br /><br />
+                            Nombre ${descTipoMayus}: ${proyectoRecord.getValue('companyname')}<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_AprobarCierre(proyectoRecord, user) {
@@ -1040,18 +1122,27 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación de culminación`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación de culminación`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         function sendEmail_NotificarCierre(proyectoRecord, user) {
@@ -1075,18 +1166,27 @@ define(['N'],
             recipients = [...new Set(recipients)];
             recipients = recipients.filter(recipient => recipient != 0); // Elimina del array los 0
 
-            // Enviar email
-            if (Object.keys(recipients).length > 0) {
-                email.send({
-                    author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
-                    recipients: recipients,
-                    subject: `[${descTipoMayus}] Notificación de culminación (Partes interesadas)`,
-                    body: `
-                        El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
-                        Link: <a href="${urlRecord}">${urlRecord}</a>
-                    `
-                });
+            // Validar regla "Se permite un máximo de 10 destinatarios ( options.recipients+ options.cc+ ).options.bcc"
+            let groups_recipients = [];
+            while (recipients.length > 0) {
+                groups_recipients.push(recipients.splice(0, 10));
             }
+
+            groups_recipients.forEach(recipients => {
+
+                // Enviar email
+                if (Object.keys(recipients).length > 0) {
+                    email.send({
+                        author: 22147, // Usuario 'NOTIFICACIONES NETSUITE'
+                        recipients: recipients,
+                        subject: `[${descTipoMayus}] Notificación de culminación (Partes interesadas)`,
+                        body: `
+                            El usuario <b>"${user.name}"</b> ha cerrado el ${descTipoMinus} "${proyectoRecord.getValue('companyname')}".<br /><br />
+                            Link: <a href="${urlRecord}">${urlRecord}</a>
+                        `
+                    });
+                }
+            });
         }
 
         return {
