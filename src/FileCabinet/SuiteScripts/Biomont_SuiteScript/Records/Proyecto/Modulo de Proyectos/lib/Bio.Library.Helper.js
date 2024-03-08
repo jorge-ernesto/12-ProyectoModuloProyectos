@@ -64,7 +64,7 @@ define(['N'],
             });
 
             var searchResult = searchObj.run().getRange(0, 1);
-            if (searchResult.length > 0) {
+            if (searchResult && searchResult.length > 0) {
                 // Obtener el valor actual del correlativo del primer resultado
                 var recordId = searchResult[0].id;
                 var currentCorrelativo = Number(searchResult[0].getValue('custrecord_bio_nro_correlativo_confcorr'));

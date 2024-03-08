@@ -82,7 +82,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         log.debug('', proyectoId);
 
                         if (proyectoId) {
-                            // Obtener url del record
+                            // Obtener url del Record
                             let urlRecord = url.resolveRecord({
                                 recordType: 'job',
                                 recordId: project_id,
@@ -114,7 +114,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         log.debug('', proyectoId);
 
                         if (proyectoId) {
-                            // Obtener url del record
+                            // Obtener url del Record
                             let urlRecord = url.resolveRecord({
                                 recordType: 'job',
                                 recordId: project_id,
@@ -139,7 +139,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         }
                     } else if (method == 'noAprobarProyecto') {
 
-                        // Obtener url del record
+                        // Obtener url del Record
                         let urlRecord = url.resolveRecord({
                             recordType: 'job',
                             recordId: project_id,
@@ -169,7 +169,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         log.debug('', proyectoId);
 
                         if (proyectoId) {
-                            // Obtener url del record
+                            // Obtener url del Record
                             let urlRecord = url.resolveRecord({
                                 recordType: 'job',
                                 recordId: project_id,
@@ -199,7 +199,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         log.debug('', proyectoId);
 
                         if (proyectoId) {
-                            // Obtener url del record
+                            // Obtener url del Record
                             let urlRecord = url.resolveRecord({
                                 recordType: 'job',
                                 recordId: project_id,
@@ -227,7 +227,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         log.debug('', proyectoId);
 
                         if (proyectoId) {
-                            // Obtener url del record
+                            // Obtener url del Record
                             let urlRecord = url.resolveRecord({
                                 recordType: 'job',
                                 recordId: project_id,
@@ -262,7 +262,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         };
                     } else if (method == 'solicitarCierre') {
 
-                        // Obtener url del record
+                        // Obtener url del Record
                         let urlRecord = url.resolveRecord({
                             recordType: 'job',
                             recordId: project_id,
@@ -292,7 +292,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         log.debug('', proyectoId);
 
                         if (proyectoId) {
-                            // Obtener url del record
+                            // Obtener url del Record
                             let urlRecord = url.resolveRecord({
                                 recordType: 'job',
                                 recordId: project_id,
@@ -316,7 +316,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         }
                     } else if (method == 'notificarCierre') {
 
-                        // Obtener url del record
+                        // Obtener url del Record
                         let urlRecord = url.resolveRecord({
                             recordType: 'job',
                             recordId: project_id,
