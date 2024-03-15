@@ -335,6 +335,49 @@ define(['./lib/Bio.Library.Helper', 'N'],
                             method: method,
                             urlRecord: urlRecord
                         };
+                    } else if (method == 'eliminarFirmas') {
+
+                        // Setear datos al record
+                        // Firma (Solicitado por)
+                        proyectoRecord.setValue('custentity_usuario_firma_solicitado_por', '');
+                        proyectoRecord.setValue('custentity_fecha_firma_solicitado_por', '');
+                        // Firma (Aprobado por)
+                        proyectoRecord.setValue('custentity_usuario_firma_aprobado_por', '');
+                        proyectoRecord.setValue('custentity_fecha_firma_aprobado_por', '');
+                        // Firma (Autorizado por)
+                        proyectoRecord.setValue('custentity_usuario_firma_autorizado_por', '');
+                        proyectoRecord.setValue('custentity_fecha_firma_autorizado_por', '');
+                        proyectoRecord.setValue('custentity_comentarios_autorizado_por', '');
+                        proyectoRecord.setValue('custentity_com_rechazo_autorizado_por', '');
+                        // Firma (Cierre aprobado por)
+                        proyectoRecord.setValue('custentity_usu_firma_cierre_aprobado_por', '');
+                        proyectoRecord.setValue('custentity_fec_firma_cierre_aprobado_por', '');
+                        proyectoRecord.setValue('custentity_coment_cierre_aprobado_por', '');
+                        // Estado
+                        proyectoRecord.setValue('entitystatus', 17); // Estado "Planificado"
+                        let proyectoId = proyectoRecord.save();
+                        log.debug('', proyectoId);
+
+                        if (proyectoId) {
+                            // Obtener url del Record
+                            let urlRecord = url.resolveRecord({
+                                recordType: 'job',
+                                recordId: project_id,
+                                params: {
+                                    _status: 'PROCESS_SIGNATURE'
+                                }
+                            })
+
+                            // Respuesta
+                            response = {
+                                code: '200',
+                                status: 'success',
+                                method: method,
+                                proyectoRecord: proyectoRecord,
+                                proyectoId: proyectoId,
+                                urlRecord: urlRecord
+                            };
+                        }
                     }
 
                     // Respuesta

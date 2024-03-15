@@ -248,6 +248,15 @@ define(['./lib/Bio.Library.Helper', 'N'],
                 }
             }
 
+            // BOTON ELIMINAR FIRMAS
+            if (comite_array.includes(user.id) || user.role == '3') {
+                form.addButton({
+                    id: 'custpage_button_eliminar_firmas',
+                    label: 'Eliminar firmas',
+                    functionName: 'eliminarFirmas()'
+                });
+            }
+
             form.addButton({
                 id: 'custpage_button_descargar_pdf',
                 label: 'PDF',
