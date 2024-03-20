@@ -1,4 +1,15 @@
 <manifest projecttype="ACCOUNTCUSTOMIZATION">
   <projectname>12-ProyectoModuloProyectos</projectname>
   <frameworkversion>1.0</frameworkversion>
+  <dependencies>
+    <features>
+      <feature required="true">SERVERSIDESCRIPTING</feature>
+      <feature required="false">CRM</feature>
+    </features>
+    <objects>
+      <object>customrecord_cseg2</object>
+      <object>custentityiqfemployeebadge</object>
+      <object>cseg2</object>
+    </objects>
+  </dependencies>
 </manifest>
