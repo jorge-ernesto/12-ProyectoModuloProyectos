@@ -262,6 +262,16 @@ define(['./lib/Bio.Library.Helper', 'N'],
                 label: 'PDF',
                 functionName: 'descargarPDF()'
             });
+
+            /*
+            for (let i = 0; i < 5; i++) {
+                form.addButton({
+                    id: 'custpage_button_test_boton_dinamico_' + i + '()',
+                    label: 'Test Button ' + i,
+                    functionName: 'dynamicFunction_' + i + '()'
+                });
+            }
+            */
         }
 
         function validarPermiso(scriptContext) {

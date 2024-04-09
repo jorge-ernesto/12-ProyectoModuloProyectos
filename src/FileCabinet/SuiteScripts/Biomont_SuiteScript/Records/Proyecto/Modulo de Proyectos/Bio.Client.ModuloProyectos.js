@@ -626,6 +626,21 @@ define(['N'],
             window.open(suitelet);
         }
 
+        /*
+        let dynamicFunctions = {};
+
+        for (let i = 0; i < 5; i++) {
+            dynamicFunctions['dynamicFunction_' + i] = function () {
+                console.log('Función dinámica con ID: ' + i);
+
+                // Obtener el id interno del record proyecto
+                let recordContext = currentRecord.get();
+                let project_id = recordContext.getValue('id');
+                console.log({ recordContext, project_id });
+            };
+        }
+        */
+
         return {
             pageInit: pageInit,
             fieldChanged: fieldChanged,
@@ -639,6 +654,7 @@ define(['N'],
             notificarCierre: notificarCierre,
             eliminarFirmas: eliminarFirmas,
             descargarPDF: descargarPDF
+            /*,...dynamicFunctions*/
         };
 
     });
