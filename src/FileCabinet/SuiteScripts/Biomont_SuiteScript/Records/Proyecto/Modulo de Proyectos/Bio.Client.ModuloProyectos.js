@@ -598,6 +598,11 @@ define(['N'],
             sendRequestWrapper('notificarCierre');
         }
 
+        function eliminarFirmas() {
+
+            sendRequestWrapper('eliminarFirmas');
+        }
+
         function descargarPDF() {
 
             // Obtener el id interno del record proyecto
@@ -632,6 +637,7 @@ define(['N'],
             solicitarCierre: solicitarCierre,
             cerrarProyecto: cerrarProyecto,
             notificarCierre: notificarCierre,
+            eliminarFirmas: eliminarFirmas,
             descargarPDF: descargarPDF
         };
 

@@ -37,8 +37,8 @@ define(['./lib/Bio.Library.Helper', 'N'],
             let { newRecord, type } = scriptContext;
 
             // Obtener datos
-            let subsidiary_id = newRecord.getValue('subsidiary') || null;
             let formulario = newRecord.getValue('customform') || null;
+            let subsidiary_id = newRecord.getValue('subsidiary') || null;
             let country_subsidiary_id = subsidiary_id ? objHelper.getCountrySubsidiary(subsidiary_id) : null;
 
             // Modo ver y pais de subsidiaria "PE"
@@ -246,6 +246,15 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         functionName: 'notificarCierre()'
                     });
                 }
+            }
+
+            // BOTON ELIMINAR FIRMAS
+            if (comite_array.includes(user.id) || user.role == '3') {
+                form.addButton({
+                    id: 'custpage_button_eliminar_firmas',
+                    label: 'Eliminar firmas',
+                    functionName: 'eliminarFirmas()'
+                });
             }
 
             form.addButton({
