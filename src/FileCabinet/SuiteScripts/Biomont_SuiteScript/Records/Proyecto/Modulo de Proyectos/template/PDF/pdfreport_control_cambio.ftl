@@ -88,6 +88,17 @@
                 height: 30px;
             }
             */
+
+            /****************** Tabla sin bordes ******************/
+
+            .tabla-sin-bordes {
+                border-collapse: collapse; /* Asegura que los bordes de las celdas se fusionen correctamente */
+            }
+
+            .tabla-sin-bordes th,
+            .tabla-sin-bordes td {
+                border: none;
+            }
         </style>
     </head>
 
@@ -107,8 +118,8 @@
                     </th>
                     <th colspan="1" width="56" class="cabecera-head" style="vertical-align: middle;">
                         Código: F-AC.009<br />
-                        Versión: 10<br />
-                        Vigente desde: <br />27/12/2023
+                        Versión: 11<br />
+                        Vigente desde: <br />22/04/2024
                     </th>
                 </tr>
                 <tr>
@@ -123,8 +134,16 @@
                     <td class="celda-body" colspan="4"><b>Area:</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="1">${params.project_data.usuario_firma_solicitado_por}<br />&nbsp;${params.project_data.fecha_firma_solicitado_por}</td>
+                    <td class="celda-body" colspan="1">${params.project_data.usuario_firma_solicitado_por}<br />${params.project_data.fecha_firma_solicitado_por}</td>
                     <td class="celda-body" colspan="4">${params.project_data.area}</td>
+                </tr>
+
+                <!-- Tipo de cambio -->
+                <tr>
+                    <td class="cabecera-body" colspan="5"><b>Tipo de cambio</b></td>
+                </tr>
+                <tr>
+                    <td class="celda-body" colspan="5">${params.project_data.tipo_cambio}</td>
                 </tr>
 
                 <!-- Objeto del cambio -->
@@ -132,7 +151,7 @@
                     <td class="cabecera-body" colspan="5"><b>Objeto del cambio</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="5">&nbsp;${params.project_data.obj_cambio}</td>
+                    <td class="celda-body" colspan="5">${params.project_data.objeto_cambio}</td>
                 </tr>
 
                 <!-- Producto/proceso relacionado al cambio -->
@@ -140,7 +159,7 @@
                     <td class="cabecera-body" colspan="5"><b>Producto/proceso relacionado al cambio</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="5">&nbsp;${params.project_data.prod_proc_rela}</td>
+                    <td class="celda-body" colspan="5">${params.project_data.prod_proc_rela?replace("\n", "<br/>")}</td>
                 </tr>
 
                 <!-- Justificación -->
@@ -148,7 +167,7 @@
                     <td class="cabecera-body" colspan="5"><b>Justificación</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="5">&nbsp;${params.project_data.justificacion}</td>
+                    <td class="celda-body" colspan="5">${params.project_data.justificacion?replace("\n", "<br/>")}</td>
                 </tr>
 
                 <!-- Propuesta de cambio (descripción) -->
@@ -156,7 +175,39 @@
                     <td class="cabecera-body" colspan="5"><b>Propuesta de cambio (descripción)</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="5">&nbsp;${params.project_data.descripcion}</td>
+                    <td class="celda-body" colspan="5">${params.project_data.descripcion?replace("\n", "<br/>")}</td>
+                </tr>
+
+                <!-- Proposito de cambio -->
+                <tr>
+                    <td class="cabecera-body" colspan="5"><b>Proposito de cambio</b></td>
+                </tr>
+                <tr>
+                    <td class="celda-body" colspan="5">${params.project_data.proposito_cambio?replace("\n", "<br/>")}</td>
+                </tr>
+
+                <!-- Beneficio esperado -->
+                <tr>
+                    <td class="cabecera-body" colspan="5"><b>Beneficio esperado</b></td>
+                </tr>
+                <tr>
+                    <td class="celda-body" colspan="5">${params.project_data.benef_esper?replace("\n", "<br/>")}</td>
+                </tr>
+
+                <!-- Consecuencias potenciales -->
+                <tr>
+                    <td class="cabecera-body" colspan="5"><b>Consecuencias potenciales</b></td>
+                </tr>
+                <tr>
+                    <td class="celda-body" colspan="5">${params.project_data.consec_potenc?replace("\n", "<br/>")}</td>
+                </tr>
+
+                <!-- Recursos -->
+                <tr>
+                    <td class="cabecera-body" colspan="5"><b>Recursos</b></td>
+                </tr>
+                <tr>
+                    <td class="celda-body" colspan="5">${params.project_data.recursos?replace("\n", "<br/>")}</td>
                 </tr>
 
                 <!-- Aprobado por: -->
@@ -164,7 +215,48 @@
                     <td class="cabecera-body" colspan="5"><b>Aprobado por (Jefe Inmediato):</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="5">&nbsp;${params.project_data.usuario_firma_aprobado_por}<br />&nbsp;${params.project_data.fecha_firma_aprobado_por}</td>
+                    <td class="celda-body" colspan="5">${params.project_data.usuario_firma_aprobado_por}<br />${params.project_data.fecha_firma_aprobado_por}</td>
+                </tr>
+
+                <!-- Identificación de riesgos y oportunidades -->
+                <tr>
+                    <td class="cabecera-body" colspan="5"><b>Identificación de riesgos y oportunidades</b></td>
+                </tr>
+                <tr>
+                    <td class="celda-body" colspan="5">Adjuntar formato F-AC.089 Identificación y evaluación  riesgos y oportunidades</td>
+                </tr>
+
+                <!-- Identificación y evaluación de peligros -->
+                <tr>
+                    <td class="cabecera-body" colspan="5"><b>Identificación y evaluación de peligros</b></td>
+                </tr>
+                <tr>
+                    <td class="celda-body" colspan="5">
+                        <table class="tabla-sin-bordes" width="100%">
+                            <tr>
+                                <td width="20%">
+                                    IPERC
+                                    <input type="checkbox" id="iperc" name="iperc" readonly="true" <#if params.project_data.iperc = true>checked="true"</#if> />
+                                </td>
+                                <td width="20%">
+                                    ATS
+                                    <input type="checkbox" id="ats" name="ats" readonly="true" <#if params.project_data.ats = true>checked="true"</#if> />
+                                </td>
+                                <td width="20%">
+                                    PETAR
+                                    <input type="checkbox" id="petar" name="petar" readonly="true" <#if params.project_data.petar = true>checked="true"</#if> />
+                                </td>
+                                <td width="20%">
+                                    NO APLICA
+                                    <input type="checkbox" id="no_aplica" name="no_aplica" readonly="true" <#if params.project_data.no_aplica = true>checked="true"</#if> />
+                                </td>
+                                <td width="20%">
+                                    OTROS<#if params.project_data.otros_det?has_content>: ${params.project_data.otros_det}</#if>
+                                    <input type="checkbox" id="otros" name="otros" readonly="true" <#if params.project_data.otros = true>checked="true"</#if> />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
                 </tr>
 
                 <!-- SEPARADOR -->
@@ -177,7 +269,7 @@
                     <td class="cabecera-body" colspan="5"><b>Factibilidad del cambio</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="1">Autorizado por (Comite de Factibilidad):</td>
+                    <td class="celda-body" colspan="1">Autorizado por (Representante del comité):</td>
                     <td class="celda-body" colspan="4">Comentarios:</td>
                 </tr>
                 <tr>
@@ -192,7 +284,7 @@
 
                 <!-- CUADRO N. 3 -->
                 <tr>
-                    <td class="cabecera-body" colspan="5"><b>Acciones por ejecutar</b></td>
+                    <td class="cabecera-body" colspan="5"><b>Plan de ejecución y seguimiento</b></td>
                 </tr>
                 <tr>
                     <td class="celda-body" colspan="2"><b>ACTIVIDAD</b></td>
@@ -219,7 +311,7 @@
                     <td class="cabecera-body" colspan="5"><b>Cierre del cambio</b></td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="1">Aprobado por:</td>
+                    <td class="celda-body" colspan="1">Representante del comité:</td>
                     <td class="celda-body" colspan="4">Comentarios:</td>
                 </tr>
                 <tr>

@@ -29,6 +29,7 @@ define(['N'],
         const CONFIG_RECORD = {
             default: {
                 fields_mandatory: {
+                    // Información principal
                     tipo: {
                         id: 'custentity_bio_tipo_proyecto',
                         label: 'Tipo'
@@ -37,6 +38,7 @@ define(['N'],
             },
             proyecto: {
                 fields_mandatory: {
+                    // Información principal
                     solicitado_por: {
                         id: 'custentity_bio_solicitado_por',
                         label: 'Solicitado por'
@@ -77,6 +79,7 @@ define(['N'],
             },
             control_cambio: {
                 fields_mandatory: {
+                    // Información principal
                     solicitado_por: {
                         id: 'custentity_bio_solicitado_por',
                         label: 'Solicitado por'
@@ -88,6 +91,10 @@ define(['N'],
                     tipo: {
                         id: 'custentity_bio_tipo_proyecto',
                         label: 'Tipo'
+                    },
+                    tipo_cambio: {
+                        id: 'custentity_bio_tipo_cambio_proyecto',
+                        label: 'Tipo de Cambio'
                     },
                     area: {
                         id: 'custentity_bio_area_proyecto',
@@ -102,7 +109,7 @@ define(['N'],
                         label: 'Nombre'
                     },
                     objeto_cambio: {
-                        id: 'custentity_bio_obj_cambio_proyecto',
+                        id: 'custentity_bio_objeto_cambio_proyecto',
                         label: 'Objeto de Cambio'
                     },
                     producto_proceso_relacionado: {
@@ -120,7 +127,50 @@ define(['N'],
                     estado: {
                         id: 'entitystatus',
                         label: 'Estado'
+                    },
+                    // Información adicional
+                    proposito_cambio: {
+                        id: 'custentity_bio_proposito_cambio_proyecto',
+                        label: 'Proposito de Cambio'
+                    },
+                    beneficio_esperado: {
+                        id: 'custentity_bio_benef_esper_proyecto',
+                        label: 'Beneficio Esperado'
+                    },
+                    consecuencias_potenciales: {
+                        id: 'custentity_bio_consec_potenc_proyecto',
+                        label: 'Consecuencias Potenciales'
+                    },
+                    recursos: {
+                        id: 'custentity_bio_recursos_proyecto',
+                        label: 'Recursos'
                     }
+                    /*
+                    iperc: {
+                        id: 'custentity_bio_iperc_proyecto',
+                        label: 'IPERC'
+                    },
+                    ats: {
+                        id: 'custentity_bio_ats_proyecto',
+                        label: 'ATS'
+                    },
+                    petar: {
+                        id: 'custentity_bio_petar_proyecto',
+                        label: 'PETAR'
+                    },
+                    no_aplica: {
+                        id: 'custentity_bio_no_aplica_proyecto',
+                        label: 'NO APLICA'
+                    },
+                    otros: {
+                        id: 'custentity_bio_otros_proyecto',
+                        label: 'OTROS'
+                    },
+                    otros_detalle: {
+                        id: 'custentity_bio_otros_det_proyecto',
+                        label: 'OTROS Descripción'
+                    }
+                    */
                 }
             }
         }
@@ -285,16 +335,31 @@ define(['N'],
             // https://6462530.app.netsuite.com/app/help/helpcenter.nl?fid=section_4625600928.html
 
             // Deshabilitar campos
+            // Información principal
             recordContext.getField('custentity_bio_solicitado_por').isDisabled = true;         // Se deshabilita
             recordContext.getField('projectmanager').isDisabled = true;                        // Se deshabilita
             // recordContext.getField('custentity_bio_tipo_proyecto').isDisabled = true;       // Se deshabilita
+            recordContext.getField('custentity_bio_tipo_cambio_proyecto').isDisabled = true;   // Se deshabilita
             recordContext.getField('custentity_bio_area_proyecto').isDisabled = true;          // Se deshabilita
             recordContext.getField('custentity_bio_codigo_proyecto').isDisabled = true;        // Se deshabilita
             recordContext.getField('companyname').isDisabled = true;                           // Se deshabilita
-            recordContext.getField('custentity_bio_obj_cambio_proyecto').isDisabled = true;    // Se deshabilita
+            recordContext.getField('custentity_bio_objeto_cambio_proyecto').isDisabled = true; // Se deshabilita
             recordContext.getField('custentity_prod_proc_rela_proyecto').isDisabled = true;    // Se deshabilita
             recordContext.getField('custentity_bio_justificacion_proyecto').isDisabled = true; // Se deshabilita
             recordContext.getField('custentity_bio_descripcion_proyecto').isDisabled = true;   // Se deshabilita
+            recordContext.getField('custentity_bio_notas_proyecto').isDisabled = true;         // Se deshabilita
+
+            // Información adicional
+            recordContext.getField('custentity_bio_proposito_cambio_proyecto').isDisabled = true; // Se deshabilita
+            recordContext.getField('custentity_bio_benef_esper_proyecto').isDisabled = true;      // Se deshabilita
+            recordContext.getField('custentity_bio_consec_potenc_proyecto').isDisabled = true;    // Se deshabilita
+            recordContext.getField('custentity_bio_recursos_proyecto').isDisabled = true;         // Se deshabilita
+            recordContext.getField('custentity_bio_iperc_proyecto').isDisabled = true;            // Se deshabilita
+            recordContext.getField('custentity_bio_ats_proyecto').isDisabled = true;              // Se deshabilita
+            recordContext.getField('custentity_bio_petar_proyecto').isDisabled = true;            // Se deshabilita
+            recordContext.getField('custentity_bio_no_aplica_proyecto').isDisabled = true;        // Se deshabilita
+            recordContext.getField('custentity_bio_otros_proyecto').isDisabled = true;            // Se deshabilita
+            recordContext.getField('custentity_bio_otros_det_proyecto').isDisabled = true;        // Se deshabilita
 
             // Modo editar
             if (mode == 'edit') {
@@ -304,25 +369,54 @@ define(['N'],
             // Modo crear
             if (mode == 'create') {
                 // Limpiar campos
+                // Información principal
+                recordContext.setValue('custentity_bio_tipo_cambio_proyecto', '');
                 recordContext.setValue('custentity_bio_codigo_proyecto', '');
-                recordContext.setValue('custentity_bio_obj_cambio_proyecto', '');
+                recordContext.setValue('custentity_bio_objeto_cambio_proyecto', '');
                 recordContext.setValue('custentity_prod_proc_rela_proyecto', '');
+
+                // Información adicional
+                recordContext.setValue('custentity_bio_proposito_cambio_proyecto', '');
+                recordContext.setValue('custentity_bio_benef_esper_proyecto', '');
+                recordContext.setValue('custentity_bio_consec_potenc_proyecto', '');
+                recordContext.setValue('custentity_bio_recursos_proyecto', '');
+                recordContext.setValue('custentity_bio_iperc_proyecto', false);
+                recordContext.setValue('custentity_bio_ats_proyecto', false);
+                recordContext.setValue('custentity_bio_petar_proyecto', false);
+                recordContext.setValue('custentity_bio_no_aplica_proyecto', false);
+                recordContext.setValue('custentity_bio_otros_proyecto', false);
+                recordContext.setValue('custentity_bio_otros_det_proyecto', '');
             }
         }
 
         function habilitarCamposProyecto(recordContext, mode) {
 
             // Deshabilitar campos
+            // Información principal
             recordContext.getField('custentity_bio_solicitado_por').isDisabled = false;         // Se habilita
             recordContext.getField('projectmanager').isDisabled = false;                        // Se habilita
             // recordContext.getField('custentity_bio_tipo_proyecto').isDisabled = false;       // Se habilita
+            recordContext.getField('custentity_bio_tipo_cambio_proyecto').isDisabled = true;    // Se deshabilita
             recordContext.getField('custentity_bio_area_proyecto').isDisabled = false;          // Se habilita
             recordContext.getField('custentity_bio_codigo_proyecto').isDisabled = true;         // Se deshabilita
             recordContext.getField('companyname').isDisabled = false;                           // Se habilita
-            recordContext.getField('custentity_bio_obj_cambio_proyecto').isDisabled = true;     // Se deshabilita
+            recordContext.getField('custentity_bio_objeto_cambio_proyecto').isDisabled = true;  // Se deshabilita
             recordContext.getField('custentity_prod_proc_rela_proyecto').isDisabled = true;     // Se deshabilita
             recordContext.getField('custentity_bio_justificacion_proyecto').isDisabled = false; // Se habilita
             recordContext.getField('custentity_bio_descripcion_proyecto').isDisabled = false;   // Se habilita
+            recordContext.getField('custentity_bio_notas_proyecto').isDisabled = false;         // Se habilita
+
+            // Información adicional
+            recordContext.getField('custentity_bio_proposito_cambio_proyecto').isDisabled = true; // Se deshabilita
+            recordContext.getField('custentity_bio_benef_esper_proyecto').isDisabled = true;      // Se deshabilita
+            recordContext.getField('custentity_bio_consec_potenc_proyecto').isDisabled = true;    // Se deshabilita
+            recordContext.getField('custentity_bio_recursos_proyecto').isDisabled = true;         // Se deshabilita
+            recordContext.getField('custentity_bio_iperc_proyecto').isDisabled = true;            // Se deshabilita
+            recordContext.getField('custentity_bio_ats_proyecto').isDisabled = true;              // Se deshabilita
+            recordContext.getField('custentity_bio_petar_proyecto').isDisabled = true;            // Se deshabilita
+            recordContext.getField('custentity_bio_no_aplica_proyecto').isDisabled = true;        // Se deshabilita
+            recordContext.getField('custentity_bio_otros_proyecto').isDisabled = true;            // Se deshabilita
+            recordContext.getField('custentity_bio_otros_det_proyecto').isDisabled = true;        // Se deshabilita
 
             // Modo crear
             if (mode == 'create') {
@@ -334,16 +428,31 @@ define(['N'],
         function habilitarCamposControlCambio(recordContext, mode) {
 
             // Deshabilitar campos
+            // Información principal
             recordContext.getField('custentity_bio_solicitado_por').isDisabled = false;         // Se habilita
             recordContext.getField('projectmanager').isDisabled = false;                        // Se habilita
             // recordContext.getField('custentity_bio_tipo_proyecto').isDisabled = false;       // Se habilita
+            recordContext.getField('custentity_bio_tipo_cambio_proyecto').isDisabled = false;   // Se habilita
             recordContext.getField('custentity_bio_area_proyecto').isDisabled = false;          // Se habilita
             recordContext.getField('custentity_bio_codigo_proyecto').isDisabled = false;        // Se habilita
             recordContext.getField('companyname').isDisabled = false;                           // Se habilita
-            recordContext.getField('custentity_bio_obj_cambio_proyecto').isDisabled = false;    // Se habilita
+            recordContext.getField('custentity_bio_objeto_cambio_proyecto').isDisabled = false; // Se habilita
             recordContext.getField('custentity_prod_proc_rela_proyecto').isDisabled = false;    // Se habilita
             recordContext.getField('custentity_bio_justificacion_proyecto').isDisabled = false; // Se habilita
             recordContext.getField('custentity_bio_descripcion_proyecto').isDisabled = false;   // Se habilita
+            recordContext.getField('custentity_bio_notas_proyecto').isDisabled = false;         // Se habilita
+
+            // Información adicional
+            recordContext.getField('custentity_bio_proposito_cambio_proyecto').isDisabled = false; // Se habilita
+            recordContext.getField('custentity_bio_benef_esper_proyecto').isDisabled = false;      // Se habilita
+            recordContext.getField('custentity_bio_consec_potenc_proyecto').isDisabled = false;    // Se habilita
+            recordContext.getField('custentity_bio_recursos_proyecto').isDisabled = false;         // Se habilita
+            recordContext.getField('custentity_bio_iperc_proyecto').isDisabled = false;            // Se habilita
+            recordContext.getField('custentity_bio_ats_proyecto').isDisabled = false;              // Se habilita
+            recordContext.getField('custentity_bio_petar_proyecto').isDisabled = false;            // Se habilita
+            recordContext.getField('custentity_bio_no_aplica_proyecto').isDisabled = false;        // Se habilita
+            recordContext.getField('custentity_bio_otros_proyecto').isDisabled = false;            // Se habilita
+            recordContext.getField('custentity_bio_otros_det_proyecto').isDisabled = false;        // Se habilita
         }
 
         function validarCamposObligatorios(recordContext) {

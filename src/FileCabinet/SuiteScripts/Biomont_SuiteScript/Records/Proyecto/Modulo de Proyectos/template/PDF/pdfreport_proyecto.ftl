@@ -131,7 +131,7 @@
                     <td class="cabecera-body" colspan="5">Descripción</td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="5">${params.project_data.descripcion}</td>
+                    <td class="celda-body" colspan="5">${params.project_data.descripcion?replace("\n", "<br/>")}</td>
                 </tr>
 
                 <!-- Justificación -->
@@ -139,7 +139,7 @@
                     <td class="cabecera-body" colspan="5">Justificación</td>
                 </tr>
                 <tr>
-                    <td class="celda-body" colspan="5">${params.project_data.justificacion}</td>
+                    <td class="celda-body" colspan="5">${params.project_data.justificacion?replace("\n", "<br/>")}</td>
                 </tr>
 
                 <!-- Autorización -->

@@ -73,13 +73,27 @@ define(['./lib/Bio.Library.Helper', 'N'],
                 tipo: projectRecord.getValue('custentity_bio_tipo_proyecto'),
 
                 // Data
+                // Información principal
+                tipo_cambio: projectRecord.getText('custentity_bio_tipo_cambio_proyecto'),
                 area: projectRecord.getText('custentity_bio_area_proyecto'),
                 codigo: projectRecord.getValue('custentity_bio_codigo_proyecto'),
                 nombre: projectRecord.getValue('companyname'),
-                obj_cambio: projectRecord.getText('custentity_bio_obj_cambio_proyecto'),
+                objeto_cambio: projectRecord.getText('custentity_bio_objeto_cambio_proyecto'),
                 prod_proc_rela: projectRecord.getText('custentity_prod_proc_rela_proyecto'),
                 justificacion: projectRecord.getText('custentity_bio_justificacion_proyecto'),
                 descripcion: projectRecord.getValue('custentity_bio_descripcion_proyecto'),
+                // Información adicional
+                proposito_cambio: projectRecord.getValue('custentity_bio_proposito_cambio_proyecto'),
+                benef_esper: projectRecord.getValue('custentity_bio_benef_esper_proyecto'),
+                consec_potenc: projectRecord.getValue('custentity_bio_consec_potenc_proyecto'),
+                recursos: projectRecord.getValue('custentity_bio_recursos_proyecto'),
+                iperc: projectRecord.getValue('custentity_bio_iperc_proyecto'),
+                ats: projectRecord.getValue('custentity_bio_ats_proyecto'),
+                petar: projectRecord.getValue('custentity_bio_petar_proyecto'),
+                no_aplica: projectRecord.getValue('custentity_bio_no_aplica_proyecto'),
+                otros: projectRecord.getValue('custentity_bio_otros_proyecto'),
+                otros_det: projectRecord.getValue('custentity_bio_otros_det_proyecto'),
+                // Firmas
                 usuario_firma_solicitado_por: projectRecord.getText('custentity_usuario_firma_solicitado_por'),
                 fecha_firma_solicitado_por: projectRecord.getText('custentity_fecha_firma_solicitado_por'),
                 usuario_firma_aprobado_por: projectRecord.getText('custentity_usuario_firma_aprobado_por'),
@@ -95,6 +109,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                 dataResumenProyecto: dataResumenProyecto
             }
 
+            // objHelper.error_log('data', data);
             return data;
         }
 
