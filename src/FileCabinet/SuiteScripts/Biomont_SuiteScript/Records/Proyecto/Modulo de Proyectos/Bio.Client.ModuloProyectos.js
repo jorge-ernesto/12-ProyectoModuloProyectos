@@ -5,7 +5,7 @@
 //      - Trabajo (job)
 
 // Validación como la usa LatamReady:
-// - ClientScript           : Se ejecuta en modo crear, copiar o editar. No se ejecuta en modo ver.
+// - ClientScript           : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
 // - En modo crear o editar : Validamos por el formulario.
 // - En modo ver            : Validamos por el pais de la subsidiaria.
 
@@ -230,7 +230,7 @@ define(['N'],
             return true;
         }
 
-        /******************/
+        /****************** Funcionalidad en campos ******************/
 
         function cargarCampos(recordContext, mode) {
 
@@ -296,12 +296,12 @@ define(['N'],
             recordContext.getField('custentity_bio_justificacion_proyecto').isDisabled = true; // Se deshabilita
             recordContext.getField('custentity_bio_descripcion_proyecto').isDisabled = true;   // Se deshabilita
 
-            // Deshabilitar combo "Tipo" en modo edicion
+            // Modo editar
             if (mode == 'edit') {
                 recordContext.getField('custentity_bio_tipo_proyecto').isDisabled = true;
             }
 
-            // No existe id, es decir aun no existe el registro
+            // Modo crear
             if (mode == 'create') {
                 // Limpiar campos
                 recordContext.setValue('custentity_bio_codigo_proyecto', '');
@@ -324,7 +324,7 @@ define(['N'],
             recordContext.getField('custentity_bio_justificacion_proyecto').isDisabled = false; // Se habilita
             recordContext.getField('custentity_bio_descripcion_proyecto').isDisabled = false;   // Se habilita
 
-            // No existe id, es decir aun no existe el registro
+            // Modo crear
             if (mode == 'create') {
                 // Limpiar campos
                 recordContext.setValue('custentity_bio_codigo_proyecto', 'A generar');
@@ -395,7 +395,7 @@ define(['N'],
             return false;
         }
 
-        /******************/
+        /****************** Solicitud HTTP ******************/
 
         function loadSweetAlertLibrary() {
             return new Promise(function (resolve, reject) {
@@ -463,7 +463,7 @@ define(['N'],
                 })
             });
             let responseData = JSON.parse(response.body);
-            console.log(responseData);
+            console.log('responseData', responseData);
 
             return responseData;
         }
@@ -477,7 +477,7 @@ define(['N'],
             window.location.href = responseData.urlRecord;
         }
 
-        /******************/
+        /****************** Mostrar botones ******************/
 
         function solicitarAprobacion() {
 

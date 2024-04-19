@@ -22,10 +22,12 @@ define(['./lib/Bio.Library.Helper', 'N'],
          * @since 2015.2
          */
         function onRequest(scriptContext) {
+            // Debug
             // scriptContext.response.setHeader('Content-type', 'application/json');
             // scriptContext.response.write(JSON.stringify(scriptContext));
             // return;
 
+            // Debug
             // log.debug('method', scriptContext.request.method);
             // log.debug('parameters', scriptContext.request.parameters);
             // log.debug('body', scriptContext.body);
@@ -73,7 +75,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                             method: method,
                             area: area
                         };
-                    } else if (method == 'solicitarAprobacion') {
+                    } else if (method == 'solicitarAprobacion' && proyectoRecord) {
 
                         // Setear datos al record
                         proyectoRecord.setValue('custentity_usuario_firma_solicitado_por', user.id);
@@ -104,7 +106,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                                 urlRecord: urlRecord
                             };
                         }
-                    } else if (method == 'aprobarProyecto') {
+                    } else if (method == 'aprobarProyecto' && proyectoRecord) {
 
                         // Setear datos al record
                         proyectoRecord.setValue('custentity_usuario_firma_aprobado_por', user.id);
@@ -137,7 +139,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                                 urlRecord: urlRecord
                             };
                         }
-                    } else if (method == 'noAprobarProyecto') {
+                    } else if (method == 'noAprobarProyecto' && proyectoRecord) {
 
                         // Obtener url del Record
                         let urlRecord = url.resolveRecord({
@@ -158,7 +160,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                             method: method,
                             urlRecord: urlRecord
                         };
-                    } else if (method == 'autorizarProyecto') {
+                    } else if (method == 'autorizarProyecto' && proyectoRecord) {
 
                         // Setear datos al record
                         proyectoRecord.setValue('custentity_usuario_firma_autorizado_por', user.id);
@@ -191,7 +193,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                                 urlRecord: urlRecord
                             };
                         }
-                    } else if (method == 'noAutorizarProyecto') {
+                    } else if (method == 'noAutorizarProyecto' && proyectoRecord) {
 
                         // Setear datos al record
                         proyectoRecord.setValue('custentity_com_rechazo_autorizado_por', comentarios);
@@ -219,7 +221,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                                 urlRecord: urlRecord
                             };
                         }
-                    } else if (method == 'actualizarEnCurso') {
+                    } else if (method == 'actualizarEnCurso' && proyectoRecord) {
 
                         // Setear datos al record
                         proyectoRecord.setValue('entitystatus', 2); // Estado "En curso"
@@ -249,7 +251,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                                 urlRecord: urlRecord
                             };
                         }
-                    } else if (method == 'notificarCulminacionTarea') {
+                    } else if (method == 'notificarCulminacionTarea' && proyectoRecord) {
 
                         // Enviar email
                         objHelper.sendEmail_NotificarCulminacionTarea(proyectoRecord, user);
@@ -260,7 +262,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                             status: 'success',
                             method: method
                         };
-                    } else if (method == 'solicitarCierre') {
+                    } else if (method == 'solicitarCierre' && proyectoRecord) {
 
                         // Obtener url del Record
                         let urlRecord = url.resolveRecord({
@@ -281,7 +283,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                             method: method,
                             urlRecord: urlRecord
                         };
-                    } else if (method == 'cerrarProyecto') {
+                    } else if (method == 'cerrarProyecto' && proyectoRecord) {
 
                         // Setear datos al record
                         proyectoRecord.setValue('custentity_usu_firma_cierre_aprobado_por', user.id);
@@ -314,7 +316,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                                 urlRecord: urlRecord
                             };
                         }
-                    } else if (method == 'notificarCierre') {
+                    } else if (method == 'notificarCierre' && proyectoRecord) {
 
                         // Obtener url del Record
                         let urlRecord = url.resolveRecord({
@@ -335,7 +337,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                             method: method,
                             urlRecord: urlRecord
                         };
-                    } else if (method == 'eliminarFirmas') {
+                    } else if (method == 'eliminarFirmas' && proyectoRecord) {
 
                         // Setear datos al record
                         // Firma (Solicitado por)

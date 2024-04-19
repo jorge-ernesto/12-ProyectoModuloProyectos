@@ -5,7 +5,7 @@
 //      - Tiempo (timebill)
 
 // Validación como la usa LatamReady:
-// - ClientScript           : Se ejecuta en modo crear, copiar o editar. No se ejecuta en modo ver.
+// - ClientScript           : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
 // - En modo crear o editar : Validamos por el formulario.
 // - En modo ver            : Validamos por el pais de la subsidiaria.
 
