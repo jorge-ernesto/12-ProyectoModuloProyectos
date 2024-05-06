@@ -21,7 +21,20 @@ define(['N'],
             throw new Error(`${message}`);
         }
 
-        /******************/
+        /****************** Validación ******************/
+
+        function getCountrySubsidiary(subsidiaryId) {
+            // Cargar el registro de la subsidiaria
+            var subsidiaryRecord = record.load({
+                type: record.Type.SUBSIDIARY,
+                id: subsidiaryId
+            });
+
+            // Obtener el pais del registro de la subsidiaria
+            var countrySubsidiary = subsidiaryRecord.getValue('country');
+
+            return countrySubsidiary;
+        }
 
         function getDataUser(projectManagerId) {
             // Cargar el registro del empleado
@@ -36,18 +49,7 @@ define(['N'],
             return { area };
         }
 
-        function getCountrySubsidiary(subsidiaryId) {
-            // Cargar el registro de la subsidiaria
-            var subsidiaryRecord = record.load({
-                type: record.Type.SUBSIDIARY,
-                id: subsidiaryId
-            });
-
-            // Obtener el pais del registro de la subsidiaria
-            var countrySubsidiary = subsidiaryRecord.getValue('country');
-
-            return countrySubsidiary;
-        }
+        /****************** Records personalizados ******************/
 
         function getCorrelativo() {
             // Buscar el registro de correlativos por la abreviatura
@@ -104,7 +106,7 @@ define(['N'],
             });
         }
 
-        /******************/
+        /****************** Data - Usuarios ******************/
 
         function getUrlRecord(projectId) {
 
@@ -252,7 +254,7 @@ define(['N'],
             return recursosId;
         }
 
-        /******************/
+        /****************** Data - PDF ******************/
 
         function getTareas(projectId) {
 
@@ -584,8 +586,6 @@ define(['N'],
             return diasSemana[numeroDia];
         }
 
-        /******************/
-
         function getDivulgacionDeCambio(projectId) {
 
             // Obtener array de id de empleados
@@ -683,7 +683,7 @@ define(['N'],
             return "-";
         }
 
-        /******************/
+        /****************** Email ******************/
 
         function sendEmail_SolicitarAprobacion(proyectoRecord, user) {
 
@@ -1194,15 +1194,17 @@ define(['N'],
             error_log,
             error_message,
             // Modulo Proyectos - Validación
-            getDataUser,
             getCountrySubsidiary,
+            getDataUser,
+            // Modulo Proyectos - Records personalizados
             getCorrelativo,
             getCorrelativoFormato,
             actualizarCorrelativo,
-            // Modulo Proyectos - Datos
+            // Modulo Proyectos - Data - Usuarios
             getComite,
             getPartesInteresadas,
             getRecursos,
+            // Modulo Proyectos - Data - PDF
             getTareas,
             getDivulgacionDeCambio,
             getResumenProyecto,

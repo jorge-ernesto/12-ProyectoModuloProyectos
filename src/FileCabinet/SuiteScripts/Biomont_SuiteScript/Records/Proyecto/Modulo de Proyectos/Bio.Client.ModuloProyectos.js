@@ -234,13 +234,14 @@ define(['N'],
             // Modo crear, editar, copiar y formulario "BIO_FRM_PROYECTO"
             if ((mode == 'create' || mode == 'edit' || mode == 'copy') && formulario == 384) {
 
-                // Esto se ejecuta cuando se hacen cambios en el combo estado accion
+                // SE EJECUTA SOLO CUANDO SE HACEN CAMBIOS EN EL COMBO ESTADO ACCION
                 if (scriptContext.fieldId == 'custentity_bio_tipo_proyecto') {
 
                     // Debug
                     console.log('fieldChanged');
                     console.log({ recordContext, mode });
 
+                    // Habilitar campos por tipo
                     habilitarCamposPorTipo(recordContext, mode);
                 }
             }
@@ -289,8 +290,8 @@ define(['N'],
             // Modo crear
             if (mode == 'create') {
 
-                // Solicitud HTTP
-                let responseData = sendRequest('getData');
+                // Obtener datos
+                let responseData = sendRequest('getDataUser');
 
                 // Cargar campos
                 recordContext.setValue('custentity_bio_area_proyecto', responseData.area); // Area del usuario que creo el proyecto
@@ -306,11 +307,11 @@ define(['N'],
             deshabilitarTodosCampos(recordContext, mode);
 
             /**
-            * Funcionalidad para habilitar y deshabilitar campos
-            * Tipo - Values.
+             * Funcionalidad para habilitar y deshabilitar campos
+             * Tipo - Values.
                 - Proyecto: 1
                 - Control de Cambio: 2
-            */
+             */
             // Obtener combo "Tipo"
             let comboTipo = recordContext.getValue('custentity_bio_tipo_proyecto');
 
@@ -330,9 +331,8 @@ define(['N'],
 
         function deshabilitarTodosCampos(recordContext, mode) {
 
-            // SuiteScript 2.x Modules
-            // N/currentRecord Module
-            // https://6462530.app.netsuite.com/app/help/helpcenter.nl?fid=section_4625600928.html
+            // Obtener campo y deshabilitarlo
+            // https://6462530-sb1.app.netsuite.com/app/help/helpcenter.nl?fid=section_4625600928.html
 
             // Deshabilitar campos
             // Información principal

@@ -63,7 +63,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
                         method: method
                     };
 
-                    if (method == 'getData') {
+                    if (method == 'getDataUser') {
 
                         // Obtener area
                         let { area } = objHelper.getDataUser(solicitado_por_id);
