@@ -536,7 +536,9 @@ define(['N'],
                     'viernes': viernes,
                     'sabado': sabado,
                 }
-                return true;
+
+                // Detener la búsqueda
+                return false;
             });
 
             // error_log('dataCalendarioPredeterminado', dataCalendarioPredeterminado);
