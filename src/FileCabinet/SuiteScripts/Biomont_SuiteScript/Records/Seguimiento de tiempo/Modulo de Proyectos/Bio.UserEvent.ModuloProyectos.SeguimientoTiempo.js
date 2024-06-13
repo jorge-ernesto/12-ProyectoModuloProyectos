@@ -5,9 +5,9 @@
 //      - Tiempo (timebill)
 
 // Validación como la usa LatamReady:
-// - ClientScript           : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
-// - En modo crear o editar : Validamos por el formulario.
-// - En modo ver            : Validamos por el pais de la subsidiaria.
+// - ClientScript                   : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
+// - En modo crear, copiar o editar : Validamos por el formulario.
+// - En modo ver                    : Validamos por el pais de la subsidiaria.
 
 /**
  * @NApiVersion 2.1
@@ -35,10 +35,10 @@ define(['./../../Proyecto/Modulo de Proyectos/lib/Bio.Library.Helper', 'N'],
             let { newRecord, type } = scriptContext;
 
             // Obtener datos
-            let formulario = newRecord.getValue('customform') || null;
+            let form_id = newRecord.getValue('customform') || null;
 
             // Modo crear, editar y formulario "FRM_SEGUIMIENTO_TIEMPO"
-            if ((type == 'create' || type == 'edit') && formulario == 398) {
+            if ((type == 'create' || type == 'edit') && form_id == 398) {
 
                 // Obtener datos
                 let projectTaskId = newRecord.getValue('casetaskevent');

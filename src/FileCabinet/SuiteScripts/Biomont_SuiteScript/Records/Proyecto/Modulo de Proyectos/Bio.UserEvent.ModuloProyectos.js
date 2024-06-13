@@ -5,9 +5,9 @@
 //      - Trabajo (job)
 
 // Validación como la usa LatamReady:
-// - ClientScript           : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
-// - En modo crear o editar : Validamos por el formulario.
-// - En modo ver            : Validamos por el pais de la subsidiaria.
+// - ClientScript                   : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
+// - En modo crear, copiar o editar : Validamos por el formulario.
+// - En modo ver                    : Validamos por el pais de la subsidiaria.
 
 /**
  * @NApiVersion 2.1
@@ -37,7 +37,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
             let { newRecord, type } = scriptContext;
 
             // Obtener datos
-            let formulario = newRecord.getValue('customform') || null;
+            let form_id = newRecord.getValue('customform') || null;
             let subsidiary_id = newRecord.getValue('subsidiary') || null;
             let country_subsidiary_id = subsidiary_id ? objHelper.getCountrySubsidiary(subsidiary_id) : null;
 
@@ -50,7 +50,7 @@ define(['./lib/Bio.Library.Helper', 'N'],
             }
 
             // Modo editar y formulario "BIO_FRM_PROYECTO"
-            if (type == 'edit' && formulario == 384) {
+            if (type == 'edit' && form_id == 384) {
 
                 validarPermiso(scriptContext);
                 calcularEficiencia(scriptContext);
@@ -71,11 +71,11 @@ define(['./lib/Bio.Library.Helper', 'N'],
             let { newRecord, type } = scriptContext;
 
             // Obtener datos
-            let formulario = newRecord.getValue('customform') || null;
+            let form_id = newRecord.getValue('customform') || null;
             let tipo = newRecord.getValue('custentity_bio_tipo_proyecto') || null;
 
             // Modo crear y formulario "BIO_FRM_PROYECTO"
-            if (type == 'create' && formulario == 384) {
+            if (type == 'create' && form_id == 384) {
 
                 // Si es tipo "Proyecto"
                 if (tipo == 1) {
@@ -100,11 +100,11 @@ define(['./lib/Bio.Library.Helper', 'N'],
             let { newRecord, type } = scriptContext;
 
             // Obtener datos
-            let formulario = newRecord.getValue('customform') || null;
+            let form_id = newRecord.getValue('customform') || null;
             let tipo = newRecord.getValue('custentity_bio_tipo_proyecto') || null;
 
             // Modo crear y formulario "BIO_FRM_PROYECTO"
-            if (type == 'create' && formulario == 384) {
+            if (type == 'create' && form_id == 384) {
 
                 // Si es tipo "Proyecto"
                 if (tipo == 1) {

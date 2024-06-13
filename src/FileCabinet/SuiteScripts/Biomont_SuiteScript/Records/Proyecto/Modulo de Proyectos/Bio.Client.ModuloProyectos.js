@@ -5,9 +5,9 @@
 //      - Trabajo (job)
 
 // Validación como la usa LatamReady:
-// - ClientScript           : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
-// - En modo crear o editar : Validamos por el formulario.
-// - En modo ver            : Validamos por el pais de la subsidiaria.
+// - ClientScript                   : No se ejecuta en modo ver. Solo se ejecuta en modo crear, copiar o editar.
+// - En modo crear, copiar o editar : Validamos por el formulario.
+// - En modo ver                    : Validamos por el pais de la subsidiaria.
 
 /**
  * @NApiVersion 2.1
@@ -193,14 +193,14 @@ define(['N'],
             let mode = scriptContext.mode;
 
             // Obtener datos
-            let formulario = recordContext.getValue('customform') || null;
+            let form_id = recordContext.getValue('customform') || null;
 
             // Debug
             console.log('pageInit');
             console.log({ recordContext, mode });
 
             // Modo crear, editar, copiar y formulario "BIO_FRM_PROYECTO"
-            if ((mode == 'create' || mode == 'edit' || mode == 'copy') && formulario == 384) {
+            if ((mode == 'create' || mode == 'edit' || mode == 'copy') && form_id == 384) {
 
                 // Cargar campos
                 cargarCampos(recordContext, mode);
@@ -229,10 +229,10 @@ define(['N'],
             let mode = recordContext.getValue('id') ? 'edit' : 'create';
 
             // Obtener datos
-            let formulario = recordContext.getValue('customform') || null;
+            let form_id = recordContext.getValue('customform') || null;
 
             // Modo crear, editar, copiar y formulario "BIO_FRM_PROYECTO"
-            if ((mode == 'create' || mode == 'edit' || mode == 'copy') && formulario == 384) {
+            if ((mode == 'create' || mode == 'edit' || mode == 'copy') && form_id == 384) {
 
                 // SE EJECUTA SOLO CUANDO SE HACEN CAMBIOS EN EL COMBO ESTADO ACCION
                 if (scriptContext.fieldId == 'custentity_bio_tipo_proyecto') {
@@ -263,14 +263,14 @@ define(['N'],
             let mode = recordContext.getValue('id') ? 'edit' : 'create';
 
             // Obtener datos
-            let formulario = recordContext.getValue('customform') || null;
+            let form_id = recordContext.getValue('customform') || null;
 
             // Debug
             console.log('saveRecord');
             console.log({ recordContext, mode });
 
             // Modo crear, editar, copiar y formulario "BIO_FRM_PROYECTO"
-            if ((mode == 'create' || mode == 'edit' || mode == 'copy') && formulario == 384) {
+            if ((mode == 'create' || mode == 'edit' || mode == 'copy') && form_id == 384) {
 
                 // Validar campos obligatorios
                 if (validarCamposObligatorios(recordContext)) {
