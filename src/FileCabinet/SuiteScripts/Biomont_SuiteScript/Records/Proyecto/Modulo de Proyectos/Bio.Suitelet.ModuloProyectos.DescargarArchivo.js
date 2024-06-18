@@ -48,6 +48,9 @@ define(['./lib/Bio.Library.Helper', 'N'],
             // Reescribir datos de PDF
             pdfFile.name = `biomont_${typeRep}.pdf`;
 
+            // Crear PDF
+            // pdfFile = rendererPDF.renderAsString().replace(/&/g, '&amp;');
+
             return { pdfFile };
         }
 
@@ -143,6 +146,9 @@ define(['./lib/Bio.Library.Helper', 'N'],
                     scriptContext.response.writeFile({
                         file: pdfFile
                     });
+
+                    // Descargar PDF
+                    // scriptContext.response.renderPdf(pdfFile);
                 }
             }
         }
